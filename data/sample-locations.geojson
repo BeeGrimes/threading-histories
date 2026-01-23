@@ -1,0 +1,139 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "location_id": "001",
+        "location_name": "Abeokuta",
+        "ethnolinguistic_group": "Yoruba",
+        "craft_type": "Dyeing",
+        "specific_technique": "Adire (indigo resist dyeing)",
+        "time_period_start": 1850,
+        "time_period_end": 1885,
+        "status": "Thriving",
+        "description": "Major center of indigo dyeing. Women's cooperative societies controlled production and trade. Adire cloth known throughout region.",
+        "historical_context": "Abeokuta founded as refuge city in 1830s. Became major textile center by mid-19th century.",
+        "colonial_impact": "None documented pre-1886",
+        "source_citation": "Johnson, S. (1921). History of the Yorubas, p. 234",
+        "images": ["img1.jpg", "img2.jpg"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.3619, 7.1475]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location_id": "002",
+        "location_name": "Kano",
+        "ethnolinguistic_group": "Hausa",
+        "craft_type": "Dyeing",
+        "specific_technique": "Indigo dyeing pits",
+        "time_period_start": 1850,
+        "time_period_end": 1900,
+        "status": "Thriving",
+        "description": "Ancient dyeing pits (over 500 years old). Men and women both involved in production. Major export center for dyed cloth.",
+        "historical_context": "Kano was major Saharan trade terminus. Textile production central to economy.",
+        "colonial_impact": "British colonial tax policies 1903 onwards affected pricing",
+        "source_citation": "British Museum. West African Textiles Collection (1899.Af.23)",
+        "images": ["img3.jpg"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.5919, 12.0022]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location_id": "003",
+        "location_name": "Iseyin",
+        "ethnolinguistic_group": "Yoruba",
+        "craft_type": "Weaving",
+        "specific_technique": "Aso-oke strip weaving",
+        "time_period_start": 1850,
+        "time_period_end": 1920,
+        "status": "Stable",
+        "description": "Traditional narrow strip loom weaving. Women's guilds controlled production. Prestige cloth for ceremonies.",
+        "historical_context": "Long tradition of weaving among Yoruba women.",
+        "colonial_impact": "Competition from imported cloth in early 1900s",
+        "source_citation": "Smithsonian NMAFA Collection",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.5957, 7.9707]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location_id": "004",
+        "location_name": "Nsukka",
+        "ethnolinguistic_group": "Igbo",
+        "craft_type": "Weaving",
+        "specific_technique": "Akwete weaving",
+        "time_period_start": 1885,
+        "time_period_end": 1960,
+        "status": "Declining",
+        "description": "Women's weaving tradition using vertical looms. Complex geometric patterns.",
+        "historical_context": "Distinctive Igbo weaving technique passed through family lines.",
+        "colonial_impact": "Significant decline after WWII due to imported textiles",
+        "source_citation": "Cole & Aniakor (1984). Igbo Arts",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.3958, 6.8567]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location_id": "005",
+        "location_name": "Benin City",
+        "ethnolinguistic_group": "Edo",
+        "craft_type": "Embroidery",
+        "specific_technique": "Royal court embroidery",
+        "time_period_start": 1850,
+        "time_period_end": 1897,
+        "status": "Disappeared",
+        "description": "Elaborate embroidery for royal court. Techniques lost after British invasion of 1897.",
+        "historical_context": "Part of sophisticated Benin court material culture.",
+        "colonial_impact": "British punitive expedition 1897 destroyed court and dispersed artisans",
+        "source_citation": "British Museum Benin Collection",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.6037, 6.3350]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location_id": "004",
+        "location_name": "Oyo",
+        "ethnolinguistic_group": "Yoruba",
+        "craft_type": "Beadwork",
+        "specific_technique": "Glass bead working",
+        "time_period_start": 1850,
+        "time_period_end": 1960,
+        "status": "Stable",
+        "description": "Traditional beadwork for royal regalia and ceremonial objects.",
+        "historical_context": "Oyo Empire had sophisticated beadwork traditions for centuries.",
+        "colonial_impact": "Maintained through colonial period but production shifted to tourist market",
+        "source_citation": "Museum of African Art Collections",
+        "images": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.9316, 7.8524]
+      }
+    }
+  
+    
+  ]
+}

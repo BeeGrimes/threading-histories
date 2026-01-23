@@ -3,38 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map - Threading Histories</title>
+    <title>Explore Map - Threading Histories</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/map.css">
 </head>
 <body>
-    <!-- Copy navigation from index.html -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
-         <div class="container">
+        <div class="container">
             <a class="navbar-brand" href="index.html">
                 <h1 class="mb-0">Threading Histories</h1>
             </a>
             
-            <!-- Mobile menu toggle button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="map.html">Explore Map</a>
+                        <a class="nav-link active" href="map.html">Explore Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="repository.html">Textile Repository</a>
+                        <a class="nav-link" href="repository.html">Textile Archive</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="methodology.html">Methodology</a>
@@ -47,17 +53,167 @@
         </div>
     </nav>
 
-    <main class="container my-5">
-        <h1 class="text-center mb-4" style="color: #2C5F5D;">Interactive Map</h1>
-        <p class="text-center lead">Coming January 2026...</p>
-    </main>
+    <!-- Map Container -->
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            
+            <!-- Left Sidebar: Filters and Legend -->
+            <div class="col-md-3 col-lg-2 map-sidebar" id="filterSidebar">
+                <div class="sidebar-content p-3">
+                    <h4 style="color: #2C5F5D;">Map Controls</h4>
+                    
+                    <!-- Time Period Filter -->
+                    <div class="filter-section mb-4">
+                        <h5>Time Period</h5>
+                        <select class="form-select" id="timePeriodSelect">
+                            <option value="all">All Periods</option>
+                            <option value="1850-1885">1850-1885</option>
+                            <option value="1885-1920">1885-1920</option>
+                            <option value="1920-1960">1920-1960</option>
+                        </select>
+                    </div>
 
-    <!-- Copy footer from index.html -->
+                    <!-- Craft Type Filter -->
+                    <div class="filter-section mb-4">
+                        <h5>Craft Type</h5>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Dyeing" id="dyeing" checked>
+                            <label class="form-check-label" for="dyeing">Dyeing</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Weaving" id="weaving" checked>
+                            <label class="form-check-label" for="weaving">Weaving</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Embroidery" id="embroidery" checked>
+                            <label class="form-check-label" for="embroidery">Embroidery</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Basketry" id="basketry" checked>
+                            <label class="form-check-label" for="basketry">Basketry</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Beadwork" id="beadwork" checked>
+                            <label class="form-check-label" for="beadwork">Beadwork</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Pottery" id="pottery" checked>
+                            <label class="form-check-label" for="pottery">Pottery</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Leatherwork" id="leatherwork" checked>
+                            <label class="form-check-label" for="leatherwork">Leatherwork</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input craft-filter" type="checkbox" value="Textile Printing" id="textile-printing" checked>
+                            <label class="form-check-label" for="textile-printing">Textile Printing</label>
+                        </div>
+                    </div>
+
+                    <!-- Ethnolinguistic Group Filter -->
+                    <div class="filter-section mb-4">
+                        <h5>Ethnic Group</h5>
+                        <div class="form-check">
+                            <input class="form-check-input ethnic-filter" type="checkbox" value="Yoruba" id="yoruba" checked>
+                            <label class="form-check-label" for="yoruba">Yoruba</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ethnic-filter" type="checkbox" value="Igbo" id="igbo" checked>
+                            <label class="form-check-label" for="igbo">Igbo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ethnic-filter" type="checkbox" value="Hausa" id="hausa" checked>
+                            <label class="form-check-label" for="hausa">Hausa</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ethnic-filter" type="checkbox" value="Fulani" id="fulani" checked>
+                            <label class="form-check-label" for="fulani">Fulani</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ethnic-filter" type="checkbox" value="Edo" id="edo" checked>
+                            <label class="form-check-label" for="edo">Edo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input ethnic-filter" type="checkbox" value="Other" id="other" checked>
+                            <label class="form-check-label" for="other">Other Groups</label>
+                        </div>
+                    </div>
+
+                    <!-- Status Legend -->
+                    <div class="filter-section">
+                        <h5>Status Legend</h5>
+                        <div class="legend-item">
+                            <span class="status-indicator" style="background-color: #16736d;"></span> Thriving
+                        </div>
+                        <div class="legend-item">
+                            <span class="status-indicator" style="background-color: #b8956a;"></span> Stable
+                        </div>
+                        <div class="legend-item">
+                            <span class="status-indicator" style="background-color: #d97655;"></span> Declining
+                        </div>
+                        <div class="legend-item">
+                            <span class="status-indicator" style="background-color: #6b6b6b;"></span> Disappeared
+                        </div>
+                    </div>
+
+                    <!-- Reset Button -->
+                    <button class="btn btn-custom mt-3 w-100" id="resetFilters">Reset All Filters</button>
+                </div>
+            </div>
+
+            <!-- Right Side: Map Area -->
+            <div class="col-md-9 col-lg-10">
+                <!-- Map Container -->
+                <div id="map"></div>
+                
+                <!-- Temporal Slider -->
+                <div class="temporal-slider" id="temporalSlider">
+                    <div class="slider-content">
+                        <label for="yearSlider">
+                            <strong>Time Period:</strong> 
+                            <span id="currentYear">1850-1960</span>
+                        </label>
+                        <input type="range" class="form-range" id="yearSlider" 
+                               min="1850" max="1960" step="10" value="1850">
+                        <div class="slider-marks">
+                            <span>1850</span>
+                            <span>1885</span>
+                            <span>1920</span>
+                            <span>1960</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Detail Sidebar (slides in from right when marker clicked) -->
+    <div class="detail-sidebar" id="detailSidebar">
+        <button class="close-btn" id="closeSidebar">&times;</button>
+        <div class="detail-content" id="detailContent">
+            <!-- Content will be dynamically inserted by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="text-center text-white py-4 mt-5" style="background-color: #2C5F5D;">
-        <!-- ... same footer content ... -->
+        <div class="container">
+            <p class="mb-2">&copy; 2024 Threading Histories | CHI Fellowship Project</p>
+            <p class="mb-0">Contact: [Your Email]</p>
+        </div>
     </footer>
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Leaflet MarkerCluster JavaScript -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    
+    <!-- Custom Map JavaScript -->
+    <script src="js/map.js"></script>
 </body>
 </html>
