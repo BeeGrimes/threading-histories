@@ -3,61 +3,708 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textile Archive - Threading Histories</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Textile Repository - Threading Histories</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --teal: #2C5F5D;
+            --terracotta: #E76F51;
+            --cream: #F4F1DE;
+            --dark-teal: #2C5F5D;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+        }
+
+        .navbar {
+            background-color: var(--teal);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--teal), var(--dark-teal));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--dark-teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .textile-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .textile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .textile-card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+
+        .textile-card-body {
+            padding: 1.25rem;
+        }
+
+        .textile-card-title {
+            color: var(--dark-teal);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .textile-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .textile-meta i {
+            color: var(--terracotta);
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+
+        .craft-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--teal);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--teal);
+            border-color: var(--teal);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-teal);
+            border-color: var(--dark-teal);
+        }
+
+        .btn-outline-primary {
+            color: var(--teal);
+            border-color: var(--teal);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--teal);
+            border-color: var(--teal);
+        }
+
+        .modal-header {
+            background-color: var(--teal);
+            color: white;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .metadata-section {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .metadata-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 0;
+        }
+
+        .metadata-row:last-child {
+            border-bottom: none;
+        }
+
+        .metadata-label {
+            font-weight: 600;
+            color: var(--dark-teal);
+        }
+
+        .map-link-btn {
+            background-color: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        .map-link-btn:hover {
+            background-color: #d55a3a;
+            border-color: #d55a3a;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .results-count {
+            color: var(--dark-teal);
+            font-weight: 600;
+        }
+
+        /* Custom checkbox styling */
+        .form-check-input:checked {
+            background-color: var(--teal);
+            border-color: var(--teal);
+        }
+
+        .reset-filters-btn {
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- Copy navigation from index.html -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
-         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <h1 class="mb-0">Threading Histories</h1>
-            </a>
-            
-            <!-- Mobile menu toggle button -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Threading Histories</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
-            <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="map.html">Explore Map</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="repository.html">Textile Repository</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="methodology.html">Methodology</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="bibliography.html">Bibliography</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="repository.html">Textile Repository</a></li>
+                    <li class="nav-item"><a class="nav-link" href="methodology.html">Methodology</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bibliography.html">Bibliography</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="container my-5">
-        <h1 class="text-center mb-4" style="color: #2C5F5D;">Textile Repository</h1>
-        <p class="text-center lead">Coming January 2026...</p>
-    </main>
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-archive me-2"></i>Textile Repository</h1>
+            <p class="lead mb-0">Explore Nigerian women's textile traditions and handicraft tools</p>
+        </div>
+    </div>
 
-    <!-- Copy footer from index.html -->
+    <div class="container">
+        <div class="row">
+            <!-- Filters Sidebar -->
+            <div class="col-lg-3">
+                <div class="filter-section">
+                    <h5 class="mb-3"><i class="fas fa-filter me-2"></i>Filters</h5>
+                    
+                    <!-- Search Box -->
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search textiles...">
+                    </div>
+
+                    <!-- Craft Type Filter -->
+                    <div class="filter-group">
+                        <label>Craft Type</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="weaving" id="filterWeaving">
+                            <label class="form-check-label" for="filterWeaving">Weaving</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="dyeing" id="filterDyeing">
+                            <label class="form-check-label" for="filterDyeing">Dyeing</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="embroidery" id="filterEmbroidery">
+                            <label class="form-check-label" for="filterEmbroidery">Embroidery</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="basketry" id="filterBasketry">
+                            <label class="form-check-label" for="filterBasketry">Basketry</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="beadwork" id="filterBeadwork">
+                            <label class="form-check-label" for="filterBeadwork">Beadwork</label>
+                        </div>
+                    </div>
+
+                    <!-- Ethnolinguistic Group Filter -->
+                    <div class="filter-group">
+                        <label>Ethnolinguistic Group</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Yoruba" id="filterYoruba">
+                            <label class="form-check-label" for="filterYoruba">Yoruba</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Igbo" id="filterIgbo">
+                            <label class="form-check-label" for="filterIgbo">Igbo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Hausa" id="filterHausa">
+                            <label class="form-check-label" for="filterHausa">Hausa</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Fulani" id="filterFulani">
+                            <label class="form-check-label" for="filterFulani">Fulani</label>
+                        </div>
+                    </div>
+
+                    <!-- Time Period Filter -->
+                    <div class="filter-group">
+                        <label>Time Period</label>
+                        <select class="form-select" id="timePeriodFilter">
+                            <option value="">All Periods</option>
+                            <option value="pre-1850">Pre-1850</option>
+                            <option value="1850-1900">1850-1900</option>
+                            <option value="1900-1950">1900-1950</option>
+                            <option value="post-1950">Post-1950</option>
+                        </select>
+                    </div>
+
+                    <!-- Status Filter -->
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select class="form-select" id="statusFilter">
+                            <option value="">All Statuses</option>
+                            <option value="thriving">Thriving</option>
+                            <option value="stable">Stable</option>
+                            <option value="declining">Declining</option>
+                            <option value="disappeared">Disappeared</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-outline-primary w-100 reset-filters-btn" onclick="resetFilters()">
+                        <i class="fas fa-redo me-2"></i>Reset Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="col-lg-9">
+                <!-- Results Header with Sort -->
+                <div class="results-header">
+                    <div>
+                        <span class="results-count" id="resultsCount">4 items found</span>
+                    </div>
+                    <div>
+                        <label class="me-2">Sort by:</label>
+                        <select class="form-select d-inline-block w-auto" id="sortSelect">
+                            <option value="title-asc">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                            <option value="date-asc">Date (Oldest First)</option>
+                            <option value="date-desc">Date (Newest First)</option>
+                            <option value="group-asc">Ethnic Group (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Textiles Grid -->
+                <div class="row" id="textilesGrid">
+                    <!-- Items will be dynamically inserted here -->
+                </div>
+
+                <!-- No Results Message -->
+                <div class="no-results d-none" id="noResults">
+                    <i class="fas fa-search fa-3x mb-3" style="color: #ccc;"></i>
+                    <h4>No textiles found</h4>
+                    <p>Try adjusting your filters or search terms</p>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Footer -->
     <footer class="text-center text-white py-4 mt-5" style="background-color: #2C5F5D;">
-        <!-- ... same footer content ... -->
+        <div class="container">
+            <p class="mb-2">&copy; 2026 Threading Histories | CHI Fellowship Project</p>
+            <p class="mb-0">Contact: grimesb4@msu.edu</p>
+        </div>
     </footer>
+    <!-- Item Detail Modal -->
+    <div class="modal fade" id="itemModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Item Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Content will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample textile data with Dublin Core metadata
+        const textileData = [
+            {
+                id: 1,
+                title: "Adire Eleko Cloth",
+                craftType: "dyeing",
+                ethnicGroup: "Yoruba",
+                region: "Abeokuta, Ogun State",
+                timePeriod: "1900-1950",
+                status: "thriving",
+                coordinates: [7.1556, 3.3472],
+                shortDescription: "Traditional Yoruba indigo-dyed cloth using cassava starch resist technique",
+                image: "https://via.placeholder.com/400x300/2A9D8F/FFFFFF?text=Adire+Eleko",
+                dublinCore: {
+                    title: "Adire Eleko Cloth",
+                    creator: "Yoruba women artisans, Abeokuta region",
+                    subject: "Indigo dyeing; Resist dyeing; Yoruba textiles; Women's handicraft",
+                    description: "Adire Eleko is a prestigious form of indigo-dyed cloth created by Yoruba women using cassava starch as a resist agent. The intricate geometric patterns are hand-painted onto white cotton cloth before being dyed in indigo vats. This technique requires considerable skill and knowledge passed down through generations of women artisans.",
+                    publisher: "Threading Histories Project",
+                    contributor: "British Museum, Nigerian National Museum",
+                    date: "c. 1920-1940",
+                    type: "Textile; Physical Object",
+                    format: "Cotton cloth; Indigo dye; Cassava starch resist",
+                    identifier: "TH-DYE-001",
+                    source: "British Museum Collection, Af1954,23.123",
+                    language: "Yoruba cultural tradition",
+                    relation: "Part of Yoruba adire textile tradition series",
+                    coverage: "Abeokuta, Ogun State, Nigeria; 1900-1950",
+                    rights: "Educational use permitted with attribution"
+                },
+                colonialImpact: "British import of synthetic dyes and factory-printed textiles in the early 20th century threatened traditional indigo dyeing. However, adire eleko persisted due to cultural significance and prestige value in Yoruba society."
+            },
+            {
+                id: 2,
+                title: "Akwete Cloth",
+                craftType: "weaving",
+                ethnicGroup: "Igbo",
+                region: "Akwete, Abia State",
+                timePeriod: "1850-1900",
+                status: "stable",
+                coordinates: [5.0864, 7.4736],
+                shortDescription: "Handwoven prestige cloth created by Igbo women on upright looms",
+                image: "https://via.placeholder.com/400x300/E76F51/FFFFFF?text=Akwete+Cloth",
+                dublinCore: {
+                    title: "Akwete Cloth",
+                    creator: "Igbo women weavers, Akwete community",
+                    subject: "Handweaving; Upright loom; Igbo textiles; Women's craft; Prestige textiles",
+                    description: "Akwete cloth is a highly valued woven textile produced exclusively by Igbo women in the Akwete region. Using an upright loom, weavers create intricate geometric and figurative patterns. The cloth holds significant cultural and economic value, often worn during important ceremonies and serving as a marker of social status.",
+                    publisher: "Threading Histories Project",
+                    contributor: "Smithsonian National Museum of African Art",
+                    date: "c. 1880-1900",
+                    type: "Textile; Physical Object",
+                    format: "Cotton and silk thread; Upright loom weaving",
+                    identifier: "TH-WEV-002",
+                    source: "Smithsonian NMAA, 85-15-23",
+                    language: "Igbo cultural tradition",
+                    relation: "Akwete weaving tradition collection",
+                    coverage: "Akwete, Abia State, Nigeria; 1850-1900",
+                    rights: "Educational use permitted with attribution"
+                },
+                colonialImpact: "Introduction of imported cloth reduced demand for expensive handwoven textiles. Colonial taxation forcing cash crop production limited time women could dedicate to weaving. However, the practice survived due to its ceremonial importance."
+            },
+            {
+                id: 3,
+                title: "Aso Oke Headwrap",
+                craftType: "weaving",
+                ethnicGroup: "Yoruba",
+                region: "Iseyin, Oyo State",
+                timePeriod: "1900-1950",
+                status: "thriving",
+                coordinates: [7.9739, 3.5994],
+                shortDescription: "Traditional Yoruba handwoven cloth strip sewn together to create prestigious garments",
+                image: "https://via.placeholder.com/400x300/2A9D8F/FFFFFF?text=Aso+Oke",
+                dublinCore: {
+                    title: "Aso Oke Headwrap (Gele)",
+                    creator: "Yoruba women weavers, Iseyin region",
+                    subject: "Strip weaving; Handloom; Yoruba textiles; Ceremonial dress; Women's craft",
+                    description: "Aso Oke ('top cloth' in Yoruba) is a handwoven cloth made on a horizontal treadle loom. Narrow strips of woven cloth are sewn together to create larger pieces used for special occasions. This example shows the fine craftsmanship used in creating gele (headwraps) worn by Yoruba women during celebrations and ceremonies.",
+                    publisher: "Threading Histories Project",
+                    contributor: "Field Museum Chicago, National Museum Lagos",
+                    date: "c. 1930-1945",
+                    type: "Textile; Ceremonial Object",
+                    format: "Cotton and lurex thread; Horizontal loom weaving",
+                    identifier: "TH-WEV-003",
+                    source: "Field Museum, Cat. No. 234567",
+                    language: "Yoruba cultural tradition",
+                    relation: "Yoruba ceremonial textile collection",
+                    coverage: "Iseyin, Oyo State, Nigeria; 1900-1950",
+                    rights: "Educational use permitted with attribution"
+                },
+                colonialImpact: "Despite colonial economic pressures, aso oke production continued due to its essential role in Yoruba life cycle ceremonies (weddings, funerals, chieftaincy installations). British colonial officials even adopted wearing aso oke for ceremonial events."
+            },
+            {
+                id: 4,
+                title: "Decorated Calabash Storage Vessel",
+                craftType: "basketry",
+                ethnicGroup: "Hausa",
+                region: "Kano, Kano State",
+                timePeriod: "1850-1900",
+                status: "declining",
+                coordinates: [12.0022, 8.5920],
+                shortDescription: "Carved and decorated gourd vessel used for storing grains and liquids",
+                image: "https://via.placeholder.com/400x300/E76F51/FFFFFF?text=Calabash",
+                dublinCore: {
+                    title: "Decorated Calabash Storage Vessel",
+                    creator: "Hausa women artisans, Kano region",
+                    subject: "Calabash carving; Gourd decoration; Storage vessels; Hausa crafts; Women's art",
+                    description: "This intricately decorated calabash demonstrates the artistic skill of Hausa women in transforming functional objects into works of art. The vessel is carved with geometric patterns and was used for storing grains, milk, or water. The decoration techniques include pyro-engraving (burning designs) and chip-carving.",
+                    publisher: "Threading Histories Project",
+                    contributor: "Birmingham Museum, University of Ibadan collections",
+                    date: "c. 1870-1890",
+                    type: "Utilitarian Object; Decorative Art",
+                    format: "Calabash gourd; Pyrography; Chip-carving",
+                    identifier: "TH-BAS-004",
+                    source: "Birmingham Museum, 1891.AF.234",
+                    language: "Hausa cultural tradition",
+                    relation: "Hausa domestic arts collection",
+                    coverage: "Kano, Kano State, Nigeria; 1850-1900",
+                    rights: "Educational use permitted with attribution"
+                },
+                colonialImpact: "Introduction of metal and later plastic containers reduced demand for traditional calabash vessels. Colonial markets preferred exportable goods over domestic crafts. Many young women abandoned calabash decoration for wage labor in colonial administrative centers."
+            }
+        ];
+
+        let currentData = [...textileData];
+        const modal = new bootstrap.Modal(document.getElementById('itemModal'));
+
+        // Initialize page
+        function init() {
+            displayTextiles(currentData);
+            setupEventListeners();
+        }
+
+        // Display textiles
+        function displayTextiles(items) {
+            const grid = document.getElementById('textilesGrid');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('d-none');
+                resultsCount.textContent = '0 items found';
+                return;
+            }
+
+            noResults.classList.add('d-none');
+            resultsCount.textContent = `${items.length} item${items.length !== 1 ? 's' : ''} found`;
+
+            grid.innerHTML = items.map(item => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="textile-card" onclick="showItemDetail(${item.id})">
+                        <img src="${item.image}" alt="${item.title}" class="textile-card-img">
+                        <div class="textile-card-body">
+                            <h5 class="textile-card-title">${item.title}</h5>
+                            <p class="textile-meta">
+                                <i class="fas fa-map-marker-alt"></i>${item.region}
+                            </p>
+                            <p class="textile-meta">
+                                <i class="fas fa-users"></i>${item.ethnicGroup}
+                            </p>
+                            <p class="textile-meta">
+                                <i class="fas fa-calendar"></i>${item.timePeriod}
+                            </p>
+                            <span class="craft-badge">${capitalizeFirst(item.craftType)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Show item detail modal
+        function showItemDetail(itemId) {
+            const item = textileData.find(i => i.id === itemId);
+            if (!item) return;
+
+            document.getElementById('modalTitle').textContent = item.title;
+            
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="text-center mb-3">
+                    <img src="${item.image}" alt="${item.title}" class="img-fluid rounded" style="max-height: 300px;">
+                </div>
+
+                <div class="mb-3">
+                    <a href="map.html?item=${item.id}" class="btn btn-primary map-link-btn w-100">
+                        <i class="fas fa-map-marked-alt me-2"></i>View on Map
+                    </a>
+                </div>
+
+                <h5 class="mt-4 mb-3">Basic Information</h5>
+                <p><strong>Craft Type:</strong> ${capitalizeFirst(item.craftType)}</p>
+                <p><strong>Ethnolinguistic Group:</strong> ${item.ethnicGroup}</p>
+                <p><strong>Region:</strong> ${item.region}</p>
+                <p><strong>Time Period:</strong> ${item.timePeriod}</p>
+                <p><strong>Status:</strong> ${capitalizeFirst(item.status)}</p>
+                <p>${item.shortDescription}</p>
+
+                <h5 class="mt-4 mb-3">Colonial Impact</h5>
+                <p>${item.colonialImpact}</p>
+
+                <h5 class="mt-4 mb-3">Dublin Core Metadata</h5>
+                <div class="metadata-section">
+                    ${Object.entries(item.dublinCore).map(([key, value]) => `
+                        <div class="metadata-row">
+                            <div class="metadata-label">${formatMetadataLabel(key)}:</div>
+                            <div>${value}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            modal.show();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+            // Craft type checkboxes
+            document.querySelectorAll('input[type="checkbox"][id^="filter"]').forEach(checkbox => {
+                checkbox.addEventListener('change', applyFilters);
+            });
+
+            // Time period and status dropdowns
+            document.getElementById('timePeriodFilter').addEventListener('change', applyFilters);
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+
+            // Sort select
+            document.getElementById('sortSelect').addEventListener('change', applySort);
+        }
+
+        // Apply filters
+        function applyFilters() {
+            let filtered = [...textileData];
+
+            // Search filter
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(item => 
+                    item.title.toLowerCase().includes(searchTerm) ||
+                    item.shortDescription.toLowerCase().includes(searchTerm) ||
+                    item.region.toLowerCase().includes(searchTerm) ||
+                    item.ethnicGroup.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Craft type filter
+            const selectedCrafts = Array.from(document.querySelectorAll('input[type="checkbox"][id^="filter"]:checked'))
+                .map(cb => cb.value)
+                .filter(v => ['weaving', 'dyeing', 'embroidery', 'basketry', 'beadwork'].includes(v));
+            
+            if (selectedCrafts.length > 0) {
+                filtered = filtered.filter(item => selectedCrafts.includes(item.craftType));
+            }
+
+            // Ethnic group filter
+            const selectedGroups = Array.from(document.querySelectorAll('input[type="checkbox"][id^="filter"]:checked'))
+                .map(cb => cb.value)
+                .filter(v => ['Yoruba', 'Igbo', 'Hausa', 'Fulani'].includes(v));
+            
+            if (selectedGroups.length > 0) {
+                filtered = filtered.filter(item => selectedGroups.includes(item.ethnicGroup));
+            }
+
+            // Time period filter
+            const timePeriod = document.getElementById('timePeriodFilter').value;
+            if (timePeriod) {
+                filtered = filtered.filter(item => item.timePeriod === timePeriod);
+            }
+
+            // Status filter
+            const status = document.getElementById('statusFilter').value;
+            if (status) {
+                filtered = filtered.filter(item => item.status === status);
+            }
+
+            currentData = filtered;
+            applySort();
+        }
+
+        // Apply sorting
+        function applySort() {
+            const sortValue = document.getElementById('sortSelect').value;
+            let sorted = [...currentData];
+
+            switch(sortValue) {
+                case 'title-asc':
+                    sorted.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'title-desc':
+                    sorted.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'date-asc':
+                    sorted.sort((a, b) => a.timePeriod.localeCompare(b.timePeriod));
+                    break;
+                case 'date-desc':
+                    sorted.sort((a, b) => b.timePeriod.localeCompare(a.timePeriod));
+                    break;
+                case 'group-asc':
+                    sorted.sort((a, b) => a.ethnicGroup.localeCompare(b.ethnicGroup));
+                    break;
+            }
+
+            displayTextiles(sorted);
+        }
+
+        // Reset all filters
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('timePeriodFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('sortSelect').value = 'title-asc';
+            
+            currentData = [...textileData];
+            displayTextiles(currentData);
+        }
+
+        // Utility functions
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function formatMetadataLabel(key) {
+            return key.split(/(?=[A-Z])/).map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+        
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init); 
+    </script>
 </body>
 </html>
