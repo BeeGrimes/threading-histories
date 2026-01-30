@@ -379,8 +379,8 @@ h2, h3 {
 }
 
 .profile-image {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid #2C5F5D;
