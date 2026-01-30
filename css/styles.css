@@ -191,3 +191,40 @@ body::before {
         font-size: 1.1rem;
     }
 }
+/* Accessibility: Add semi-transparent backgrounds to text sections */
+.project-intro {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-intro h2 {
+    font-weight: 700;
+}
+
+.project-intro .lead {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Ensure cards have solid white backgrounds */
+.card {
+    background-color: #ffffff !important;
+}
+
+/* Timeline section - make background more opaque */
+.timeline {
+    background-color: rgba(250, 247, 242, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make all body text slightly darker/bolder for better readability */
+main {
+    color: #2d2d2d;
+}
+
+/* Add subtle text shadow to headings for extra pop */
+h2, h3 {
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
