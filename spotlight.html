@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Spotlight - Threading Histories</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-teal: #2C7873;
+            --secondary-terracotta: #C96D5E;
+            --accent-cream: #F4E9DC;
+            --text-dark: #2D3142;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            background-color: var(--accent-cream);
+        }
+
+        .navbar {
+            background-color: var(--primary-teal);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cream) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-terracotta));
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Spotlight Card Styles */
+        .spotlight-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spotlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .spotlight-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .spotlight-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spotlight-quote {
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .spotlight-quote:before {
+    content: "\201C";  /* Unicode for left double quote */
+    font-size: 3rem;
+    color: var(--secondary-terracotta);
+    position: absolute;
+    left: -5px;
+    top: -15px;
+    font-family: Georgia, serif;
+}
+
+        .spotlight-meta {
+            border-top: 2px solid var(--accent-cream);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .contributor-name {
+            font-weight: bold;
+            color: var(--primary-teal);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .location-craft {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .craft-badge {
+            display: inline-block;
+            background-color: var(--primary-teal);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-section h3 {
+            color: var(--primary-teal);
+            border-bottom: 3px solid var(--secondary-terracotta);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Submission CTA */
+        .submission-cta {
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-terracotta));
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .submission-cta h3 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .submission-cta .btn {
+            background: white;
+            color: var(--primary-teal);
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border: none;
+            margin-top: 1rem;
+        }
+
+        .submission-cta .btn:hover {
+            background: var(--accent-cream);
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 12px;
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--secondary-terracotta);
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Guidelines List */
+        .guidelines-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .guidelines-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .guidelines-list li:before {
+            content: "✓";
+            color: var(--primary-teal);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Threading Histories</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="archive.html">Textile Repository</a></li>
+                    <li class="nav-item"><a class="nav-link" href="methodology.html">Methodology</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bibliography.html">Bibliography</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="spotlight.html">Community Spotlight</a></li>
+                    <li class="nav-item"><a class="nav-link" href="community.html">Community Outreach</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container text-center">
+            <h1><i class="bi bi-people"></i> Community Spotlight</h1>
+            <p class="lead">Celebrating Living Traditions & Contemporary Voices</p>
+            <p>Where history meets the present: Community members share their connections to Nigerian textile traditions</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Introduction Section -->
+        <div class="info-section">
+            <h3>Connecting Past & Present</h3>
+            <p>While the historical archive documents textile traditions from 1850-1960, these practices continue to thrive today through the hands and voices of contemporary artisans, cultural practitioners, and community members.</p>
+            
+            <p>This Community Spotlight celebrates the living legacy of Nigerian women's textile traditions. Here, you'll find images and stories shared by community members wearing traditional dress, practicing ancestral crafts, or preserving cultural knowledge passed down through generations.</p>
+
+            <p><strong>These contributions serve as contemporary ethnographic documentation</strong>, creating a richer, more complete understanding of how textile traditions have evolved, persisted, and adapted over time.</p>
+        </div>
+
+        <!-- Spotlight Gallery -->
+        <div class="row" id="spotlightGallery">
+            
+            <!-- EXAMPLE SPOTLIGHT 1 - Replace with real submissions -->
+            <div class="col-md-6 col-lg-4">
+                <div class="spotlight-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%232C7873'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='32' fill='white'%3EAdire Dyeing%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%23F4E9DC'%3EComing Soon%3C/text%3E%3C/svg%3E" alt="Traditional Adire" class="spotlight-image" data-bs-toggle="modal" data-bs-target="#spotlight1Modal">
+                    <div class="spotlight-content">
+                        <div class="spotlight-quote">
+                            "My grandmother taught me adire dyeing when I was twelve. Every pattern tells a story—this one represents the journey of water, always flowing, always changing, but never losing its essence. When I dye cloth, I feel connected to all the women in my family who came before me."
+                        </div>
+                        <div class="spotlight-meta">
+                            <span class="contributor-name">Folake Adeyemi</span>
+                            <span class="location-craft">Lagos, Nigeria • Adire Dyeing</span>
+                            <div>
+                                <span class="craft-badge">Contemporary Practice</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAMPLE SPOTLIGHT 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="spotlight-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23C96D5E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='32' fill='white'%3EAkwete Weaving%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%23F4E9DC'%3EComing Soon%3C/text%3E%3C/svg%3E" alt="Akwete Weaving" class="spotlight-image" data-bs-toggle="modal" data-bs-target="#spotlight2Modal">
+                    <div class="spotlight-content">
+                        <div class="spotlight-quote">
+                            "In Akwete, we say the loom is our library. Each pattern is a book, each thread is a word. My mother's hands taught mine, her mother's hands taught hers. This cloth carries five generations of women's wisdom."
+                        </div>
+                        <div class="spotlight-meta">
+                            <span class="contributor-name">Chioma Nwankwo</span>
+                            <span class="location-craft">Akwete, Abia State • Traditional Weaving</span>
+                            <div>
+                                <span class="craft-badge">Intergenerational Practice</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAMPLE SPOTLIGHT 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="spotlight-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%236c757d'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='32' fill='white'%3EFamily Heirloom%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%23F4E9DC'%3EComing Soon%3C/text%3E%3C/svg%3E" alt="Ceremonial Dress" class="spotlight-image" data-bs-toggle="modal" data-bs-target="#spotlight3Modal">
+                    <div class="spotlight-content">
+                        <div class="spotlight-quote">
+                            "This is my grandmother's wedding aso oke from 1947. We still wear it for special ceremonies. The gold threads have dulled but the love woven into each stripe remains bright. It reminds us that our traditions are not museum pieces—they are living, breathing parts of who we are."
+                        </div>
+                        <div class="spotlight-meta">
+                            <span class="contributor-name">Titilayo Ogunleye</span>
+                            <span class="location-craft">Ibadan, Nigeria • Family Heirloom</span>
+                            <div>
+                                <span class="craft-badge">Historical Preservation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADD MORE SPOTLIGHT CARDS HERE AS SUBMISSIONS COME IN -->
+
+        </div>
+
+        <!-- Empty State (show when no submissions yet) - UNCOMMENT when you remove examples -->
+        <!-- 
+        <div class="empty-state">
+            <i class="bi bi-images"></i>
+            <h3>The Spotlight Awaits</h3>
+            <p>Be the first to share your story! Submit your images and experiences below.</p>
+        </div>
+        -->
+
+        <!-- Submission Call to Action -->
+        <div class="submission-cta">
+            <h3>Share Your Story</h3>
+            <p class="lead">Do you practice traditional textile crafts? Wear cultural dress? Preserve family heirlooms?</p>
+            <p>We invite you to contribute to the Community Spotlight and help document the living legacy of Nigerian textile traditions.</p>
+            <a href="community.html" class="btn btn-lg">Submit Your Story & Images</a>
+        </div>
+
+        <!-- Submission Guidelines -->
+        <div class="info-section">
+            <h3><i class="bi bi-info-circle"></i> Submission Guidelines</h3>
+            
+            <h5>What We're Looking For:</h5>
+            <ul class="guidelines-list">
+                <li>Images of you in traditional Nigerian dress or cultural attire</li>
+                <li>Photos of you practicing textile crafts (weaving, dyeing, embroidery, etc.)</li>
+                <li>Images of traditional tools, looms, or materials you use</li>
+                <li>Family heirlooms or textiles with personal significance</li>
+                <li>Contemporary adaptations of traditional techniques</li>
+            </ul>
+
+            <h5 class="mt-4">What to Include:</h5>
+            <ul class="guidelines-list">
+                <li><strong>Your Name:</strong> How you'd like to be credited</li>
+                <li><strong>Location:</strong> Your city/town and state</li>
+                <li><strong>Craft/Tradition:</strong> What textile tradition is shown</li>
+                <li><strong>Your Story:</strong> 2-4 sentences about your connection to this tradition (50-150 words)</li>
+                <li><strong>Image:</strong> High-quality photo (JPEG or PNG, at least 1200px wide)</li>
+                <li><strong>Permission:</strong> Confirmation that you own the image and consent to publication</li>
+            </ul>
+
+            <h5 class="mt-4">Cultural Sensitivity:</h5>
+            <ul class="guidelines-list">
+                <li>We respect sacred or ceremonial traditions—only share what is appropriate to make public</li>
+                <li>Family permission is required for images of minors</li>
+                <li>You may request anonymity while still sharing your image and story</li>
+                <li>Images of religious or sacred textiles should only be submitted if culturally appropriate</li>
+            </ul>
+
+            <div class="alert alert-info mt-4">
+                <strong>Review Process:</strong> All submissions are reviewed for appropriateness and cultural sensitivity before publication. I will contact you to verify details and discuss any questions. You maintain copyright to your images while granting Threading Histories permission to display them with attribution.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals for Full-Size Images -->
+    
+    <!-- Modal 1 -->
+    <div class="modal fade" id="spotlight1Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Folake Adeyemi - Adire Dyeing</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%232C7873'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='32' fill='white'%3EAdire Dyeing%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%23F4E9DC'%3EComing Soon%3C/text%3E%3C/svg%3E" alt="Traditional Adire" class="modal-image">
+                    <p class="mt-3"><em>"My grandmother taught me adire dyeing when I was twelve. Every pattern tells a story—this one represents the journey of water, always flowing, always changing, but never losing its essence. When I dye cloth, I feel connected to all the women in my family who came before me."</em></p>
+                    <p><strong>Location:</strong> Lagos, Nigeria<br>
+                    <strong>Tradition:</strong> Adire Dyeing<br>
+                    <strong>Contributed:</strong> January 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="spotlight2Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chioma Nwankwo - Akwete Weaving</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23C96D5E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='32' fill='white'%3EAkwete Weaving%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%23F4E9DC'%3EComing Soon%3C/text%3E%3C/svg%3E" alt="Akwete Weaving" class="modal-image">
+                    <p class="mt-3"><em>"In Akwete, we say the loom is our library. Each pattern is a book, each thread is a word. My mother's hands taught mine, her mother's hands taught hers. This cloth carries five generations of women's wisdom."</em></p>
+                    <p><strong>Location:</strong> Akwete, Abia State<br>
+                    <strong>Tradition:</strong> Traditional Weaving<br>
+                    <strong>Contributed:</strong> January 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="spotlight3Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Titilayo Ogunleye - Family Heirloom</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%236c757d'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='32' fill='white'%3EFamily Heirloom%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%23F4E9DC'%3EComing Soon%3C/text%3E%3C/svg%3E" alt="Ceremonial Dress" class="modal-image">
+                    <p class="mt-3"><em>"This is my grandmother's wedding aso oke from 1947. We still wear it for special ceremonies. The gold threads have dulled but the love woven into each stripe remains bright. It reminds us that our traditions are not museum pieces—they are living, breathing parts of who we are."</em></p>
+                    <p><strong>Location:</strong> Ibadan, Nigeria<br>
+                    <strong>Tradition:</strong> Family Heirloom<br>
+                    <strong>Contributed:</strong> January 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2025-2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
+            <p>
+                <a href="#" class="text-white me-3">Privacy Policy</a>
+                <a href="#" class="text-white">Terms of Use</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
