@@ -1,0 +1,293 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Threading Histories: Nigerian Women's Textile Traditions Dataset",
+    "description": "Geospatial data documenting Nigerian women's textile handicraft traditions from 1850-1960",
+    "version": "1.0.0",
+    "last_updated": "2024-12-15",
+    "creator": "Bryttany Grimes",
+    "license": "CC BY 4.0",
+    "citation": "Grimes, Bryttany. (2024). Threading Histories: Nigerian Women's Textile Traditions Dataset. CHI Fellowship, Michigan State University. https://threadinghistories.org",
+    "total_locations": 12,
+    "time_period": "1850-1960",
+    "geographic_coverage": "Nigeria"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.3792, 6.5244]
+      },
+      "properties": {
+        "id": "TH001",
+        "location_name": "Lagos",
+        "region": "Southwest Nigeria",
+        "ethnolinguistic_group": "Yoruba",
+        "craft_type": "Dyeing",
+        "specific_technique": "Indigo dyeing (Adire)",
+        "time_period": "1850-1900",
+        "status": "Thriving",
+        "description": "Lagos served as a major center for Yoruba indigo dyeing traditions. Women artisans developed sophisticated resist-dyeing techniques including adire eleko (starch resist) and adire oniko (tied resist). The city's coastal location facilitated trade networks.",
+        "colonial_impact": "Introduction of imported European dyes in 1880s began to compete with traditional indigo production. However, local demand remained strong through this period.",
+        "sources": "British Museum Collection 1892.5.14; Colonial Office Records CO 147/89",
+        "images": ["lagos_adire_1890.jpg", "adire_cloth_detail.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-11-15"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.4951, 9.0579]
+      },
+      "properties": {
+        "id": "TH002",
+        "location_name": "Abuja (Historical Territory)",
+        "region": "North Central Nigeria",
+        "ethnolinguistic_group": "Gbagyi",
+        "craft_type": "Weaving",
+        "specific_technique": "Strip weaving",
+        "time_period": "1850-1900",
+        "status": "Stable",
+        "description": "Gbagyi women practiced traditional strip weaving techniques, creating narrow bands of cloth that were sewn together. Distinctive geometric patterns identified different family lineages.",
+        "colonial_impact": "Minimal European contact during this period. Traditional practices continued largely unchanged.",
+        "sources": "Missionary Records, Rhodes House Library MS.Afr.s.1840",
+        "images": ["gbagyi_weaving.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-11-18"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.3986, 5.6037]
+      },
+      "properties": {
+        "id": "TH003",
+        "location_name": "Benin City",
+        "region": "South-South Nigeria",
+        "ethnolinguistic_group": "Edo",
+        "craft_type": "Embroidery",
+        "specific_technique": "Coral bead embroidery",
+        "time_period": "1850-1897",
+        "status": "Thriving",
+        "description": "Edo women created elaborate coral bead embroidery for royal court regalia. These textiles held significant cultural and political meaning within the Kingdom of Benin.",
+        "colonial_impact": "The British invasion of 1897 devastated traditional craft production. Many artisans were displaced and materials were looted.",
+        "sources": "British Museum Benin Collection; Smithsonian NMAFA 2005-6-1",
+        "images": ["benin_coral_embroidery.jpg", "benin_court_textile.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-11-20"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.0498, 4.8156]
+      },
+      "properties": {
+        "id": "TH004",
+        "location_name": "Asaba",
+        "region": "South-South Nigeria",
+        "ethnolinguistic_group": "Igbo",
+        "craft_type": "Weaving",
+        "specific_technique": "Akwete weaving",
+        "time_period": "1850-1900",
+        "status": "Thriving",
+        "description": "Akwete weaving, practiced by Igbo women, produced colorful woven textiles with complex geometric patterns. The vertical loom technique was distinctive to this region.",
+        "colonial_impact": "Early colonial period saw continued strong demand for traditional textiles. Local markets remained robust.",
+        "sources": "Colonial Trade Reports, National Archives UK",
+        "images": ["akwete_loom.jpg", "akwete_cloth.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-11-22"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.5167, 12.0000]
+      },
+      "properties": {
+        "id": "TH005",
+        "location_name": "Kano",
+        "region": "Northwest Nigeria",
+        "ethnolinguistic_group": "Hausa",
+        "craft_type": "Dyeing",
+        "specific_technique": "Indigo dyeing pits",
+        "time_period": "1850-1900",
+        "status": "Thriving",
+        "description": "Kano's famous dyeing pits produced indigo-dyed textiles traded across the Sahara. While men operated the dye pits, women were integral to preparatory work and pattern creation.",
+        "colonial_impact": "Introduction of synthetic dyes in late 1890s began to alter production methods, though traditional techniques persisted.",
+        "sources": "Colonial Office CO 446/7; Historical photographs, Birmingham Museum",
+        "images": ["kano_dye_pits.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-11-25"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.9000, 7.3775]
+      },
+      "properties": {
+        "id": "TH006",
+        "location_name": "Ibadan",
+        "region": "Southwest Nigeria",
+        "ethnolinguistic_group": "Yoruba",
+        "craft_type": "Dyeing",
+        "specific_technique": "Adire eleko (starch resist)",
+        "time_period": "1900-1950",
+        "status": "Stable",
+        "description": "Ibadan became a significant center for adire production in the early 20th century. Women artisans developed new designs and adapted techniques to meet changing markets.",
+        "colonial_impact": "Colonial economy created new demand from European administrators and missionaries. However, imported textiles increasingly competed for market share.",
+        "sources": "Field Museum Collections; Oral histories collected by University of Ibadan",
+        "images": ["ibadan_adire.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-11-28"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.4790, 6.3350]
+      },
+      "properties": {
+        "id": "TH007",
+        "location_name": "Nsukka",
+        "region": "Southeast Nigeria",
+        "ethnolinguistic_group": "Igbo",
+        "craft_type": "Pottery and textile integration",
+        "specific_technique": "Ceremonial cloth production",
+        "time_period": "1850-1920",
+        "status": "Declining",
+        "description": "Nsukka women combined textile production with pottery, creating ceremonial cloths used in traditional religious practices. These textiles held deep spiritual significance.",
+        "colonial_impact": "Christian missionary activity from 1900s discouraged traditional religious practices, reducing demand for ceremonial textiles.",
+        "sources": "Missionary Records, Presbyterian Historical Society; Nsukka Cultural Center archives",
+        "images": ["nsukka_ceremonial_cloth.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-12-01"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.3500, 7.8500]
+      },
+      "properties": {
+        "id": "TH008",
+        "location_name": "Iseyin",
+        "region": "Southwest Nigeria",
+        "ethnolinguistic_group": "Yoruba",
+        "craft_type": "Weaving",
+        "specific_technique": "Aso oke (narrow strip weaving)",
+        "time_period": "1850-1960",
+        "status": "Stable",
+        "description": "Iseyin specialized in aso oke production, where narrow strips were woven and sewn together to create prestigious garments. Women prepared thread and managed dyeing processes.",
+        "colonial_impact": "Demand remained steady through colonial period for ceremonial occasions. Some adaptation to new color preferences influenced by European contact.",
+        "sources": "Oral histories; British Museum textile collection",
+        "images": ["aso_oke_weaving.jpg", "aso_oke_cloth.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-12-03"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.5982, 5.5160]
+      },
+      "properties": {
+        "id": "TH009",
+        "location_name": "Calabar",
+        "region": "South-South Nigeria",
+        "ethnolinguistic_group": "Efik",
+        "craft_type": "Embroidery",
+        "specific_technique": "Beadwork and thread embroidery",
+        "time_period": "1850-1920",
+        "status": "Declining",
+        "description": "Efik women created intricate embroidered textiles for masquerade costumes and ceremonial dress. Coastal location influenced incorporation of traded materials.",
+        "colonial_impact": "British colonial administration from 1885 disrupted traditional governance structures that supported craft production. Imported machine-made embroidery competed with handwork.",
+        "sources": "Colonial photographs, National Archives UK; Calabar Museum records",
+        "images": ["efik_embroidery.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-12-05"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.0333, 4.7500]
+      },
+      "properties": {
+        "id": "TH010",
+        "location_name": "Akwete",
+        "region": "Southeast Nigeria",
+        "ethnolinguistic_group": "Igbo",
+        "craft_type": "Weaving",
+        "specific_technique": "Akwete cloth weaving",
+        "time_period": "1900-1960",
+        "status": "Thriving",
+        "description": "The town of Akwete gave its name to a distinctive weaving tradition practiced exclusively by women. Complex patterns and bright colors characterized these prestigious textiles.",
+        "colonial_impact": "Despite colonial disruption elsewhere, Akwete weaving remained economically viable throughout the colonial period due to strong local and regional demand.",
+        "sources": "Anthropological surveys, 1930s; University of Nigeria, Nsukka archives",
+        "images": ["akwete_weavers.jpg", "akwete_pattern.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-12-08"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.1667, 9.6167]
+      },
+      "properties": {
+        "id": "TH011",
+        "location_name": "Jos Plateau",
+        "region": "North Central Nigeria",
+        "ethnolinguistic_group": "Multiple groups",
+        "craft_type": "Basketry and textile integration",
+        "specific_technique": "Woven baskets with textile elements",
+        "time_period": "1850-1950",
+        "status": "Stable",
+        "description": "Various ethnic groups on the Jos Plateau combined basketry with textile production. Women created functional and decorative items integrating both traditions.",
+        "colonial_impact": "Tin mining operations from 1900s brought economic changes and population shifts, but craft traditions adapted to serve both local and migrant communities.",
+        "sources": "Mining company records; Jos Museum ethnographic collection",
+        "images": ["jos_basketry.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-12-10"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.7333, 8.9000]
+      },
+      "properties": {
+        "id": "TH012",
+        "location_name": "Lafia",
+        "region": "North Central Nigeria",
+        "ethnolinguistic_group": "Alago",
+        "craft_type": "Weaving",
+        "specific_technique": "Cotton cloth weaving",
+        "time_period": "1850-1930",
+        "status": "Declining",
+        "description": "Alago women practiced traditional cotton cloth weaving, producing everyday textiles for local consumption. Techniques passed through matrilineal lines.",
+        "colonial_impact": "Introduction of imported cotton textiles from 1890s undercut local production. By 1930s, traditional weaving significantly diminished as economic activity.",
+        "sources": "Colonial trade statistics; Anthropological field notes, 1920s",
+        "images": ["alago_cotton_weaving.jpg"],
+        "contributor": "Archival Research",
+        "date_added": "2024-12-12"
+      }
+    }
+  ]
+}

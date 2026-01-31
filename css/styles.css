@@ -426,3 +426,171 @@ h2, h3 {
         margin-top: 2rem;
     }
 }
+/* ================================================
+   DATA DOWNLOAD SECTION STYLES
+   ================================================ */
+
+/* Data Download Bar (Compact) */
+.data-download-bar {
+    background-color: #f8f9fa;
+    border-top: 2px solid var(--primary-teal, #2C7873);
+    border-bottom: 2px solid var(--primary-teal, #2C7873);
+    padding: 1.5rem 0;
+    margin: 2rem 0;
+}
+
+.data-download-bar h5 {
+    color: var(--primary-teal, #2C7873);
+}
+
+.data-download-bar .btn-outline-primary {
+    border-color: var(--primary-teal, #2C7873);
+    color: var(--primary-teal, #2C7873);
+}
+
+.data-download-bar .btn-outline-primary:hover {
+    background-color: var(--primary-teal, #2C7873);
+    color: white;
+}
+
+/* Full Download Section */
+.data-download-section {
+    background-color: var(--accent-cream, #F4E9DC);
+}
+
+.section-title {
+    color: var(--primary-teal, #2C7873);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Download Cards */
+.download-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.download-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.download-icon.geojson {
+    background: linear-gradient(135deg, #2C7873, #3a9690);
+}
+
+.download-icon.csv {
+    background: linear-gradient(135deg, #C96D5E, #d88577);
+}
+
+.download-icon.json {
+    background: linear-gradient(135deg, #6c757d, #858e96);
+}
+
+.download-card h4 {
+    color: var(--text-dark, #2D3142);
+    margin-bottom: 0.5rem;
+}
+
+.format-details {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    font-size: 0.9rem;
+    flex-grow: 1;
+}
+
+.format-details li {
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.format-details li:last-child {
+    border-bottom: none;
+}
+
+.format-details li:before {
+    content: "✓ ";
+    color: var(--primary-teal, #2C7873);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.btn-download {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    background-color: var(--primary-teal, #2C7873);
+    border: none;
+}
+
+.btn-download:hover {
+    background-color: var(--secondary-terracotta, #C96D5E);
+}
+
+/* Metadata Card */
+.metadata-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid var(--primary-teal, #2C7873);
+}
+
+.metadata-icon {
+    font-size: 3rem;
+    color: var(--primary-teal, #2C7873);
+}
+
+/* Usage Info */
+.usage-info {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.usage-info h4 {
+    color: var(--primary-teal, #2C7873);
+    border-bottom: 2px solid var(--secondary-terracotta, #C96D5E);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.citation-box {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.copy-citation {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* End Data Download Section Styles */

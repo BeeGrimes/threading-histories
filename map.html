@@ -19,6 +19,26 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/map.css">
 </head>
+<script>
+function copyCitation() {
+    const citation = "Grimes, Bryttany. (2026). Threading Histories: Nigerian Women's Textile Traditions Dataset (Version 1.0.0) [Data set]. CHI Fellowship, Michigan State University. https://threadinghistories.org";
+    
+    navigator.clipboard.writeText(citation).then(function() {
+        // Success feedback
+        const btn = event.target.closest('.copy-citation');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        btn.classList.add('text-success');
+        
+        setTimeout(function() {
+            btn.innerHTML = originalHTML;
+            btn.classList.remove('text-success');
+        }, 2000);
+    }).catch(function(err) {
+        alert('Failed to copy citation. Please copy manually.');
+    });
+}
+</script>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
@@ -196,6 +216,137 @@
             <!-- Content will be dynamically inserted by JavaScript -->
         </div>
     </div>
+<section class="data-download-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-4">
+                <h2 class="section-title">Download Open Data</h2>
+                <p class="lead">Access the complete Threading Histories dataset in multiple formats. All data is licensed under CC BY 4.0 for reuse with attribution.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- GeoJSON Download Card -->
+            <div class="col-md-4">
+                <div class="download-card">
+                    <div class="download-icon geojson">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <h4>GeoJSON</h4>
+                    <p class="text-muted">For GIS applications and web mapping</p>
+                    <ul class="format-details">
+                        <li>Spatial data with coordinates</li>
+                        <li>Works with QGIS, Leaflet, Mapbox</li>
+                        <li>WGS84 coordinate system</li>
+                        <li>~28 KB</li>
+                    </ul>
+                    <a href="data/threading_histories_dataset.geojson" download class="btn btn-primary btn-download">
+                        <i class="bi bi-download"></i> Download GeoJSON
+                    </a>
+                </div>
+            </div>
+
+            <!-- CSV Download Card -->
+            <div class="col-md-4">
+                <div class="download-card">
+                    <div class="download-icon csv">
+                        <i class="bi bi-file-spreadsheet"></i>
+                    </div>
+                    <h4>CSV</h4>
+                    <p class="text-muted">For spreadsheets and statistical analysis</p>
+                    <ul class="format-details">
+                        <li>Opens in Excel, Google Sheets</li>
+                        <li>Compatible with R, Python, SPSS</li>
+                        <li>UTF-8 encoded</li>
+                        <li>~5 KB</li>
+                    </ul>
+                    <a href="data/threading_histories_dataset.csv" download class="btn btn-primary btn-download">
+                        <i class="bi bi-download"></i> Download CSV
+                    </a>
+                </div>
+            </div>
+
+            <!-- JSON Download Card -->
+            <div class="col-md-4">
+                <div class="download-card">
+                    <div class="download-icon json">
+                        <i class="bi bi-code-square"></i>
+                    </div>
+                    <h4>JSON</h4>
+                    <p class="text-muted">For web applications and programming</p>
+                    <ul class="format-details">
+                        <li>Structured data format</li>
+                        <li>Works with JavaScript, Python</li>
+                        <li>Easy to parse and process</li>
+                        <li>~28 KB</li>
+                    </ul>
+                    <a href="data/threading_histories_dataset.json" download class="btn btn-primary btn-download">
+                        <i class="bi bi-download"></i> Download JSON
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metadata & Documentation Row -->
+        <div class="row mt-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="metadata-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <i class="bi bi-book metadata-icon"></i>
+                        </div>
+                        <div class="col-md-7">
+                            <h5 class="mb-1">Data Dictionary & Metadata</h5>
+                            <p class="mb-0 text-muted">Complete documentation of field definitions, methodology, and usage guidelines</p>
+                        </div>
+                        <div class="col-md-3 text-md-end">
+                            <a href="data/DATA_DICTIONARY.md" download class="btn btn-outline-primary">
+                                <i class="bi bi-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Information -->
+        <div class="row mt-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="usage-info">
+                    <h4>Usage & Citation</h4>
+                    <p><strong>License:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
+                    <p><strong>Citation:</strong></p>
+                    <div class="citation-box">
+                        <code>
+                            Grimes, Bryttany. (2024). Threading Histories: Nigerian Women's Textile Traditions Dataset (Version 1.0.0) [Data set]. CHI Fellowship, Michigan State University. https://threadinghistories.org
+                        </code>
+                        <button class="btn btn-sm btn-link copy-citation" onclick="copyCitation()">
+                            <i class="bi bi-clipboard"></i> Copy
+                        </button>
+                    </div>
+                    <p class="mt-3"><strong>Please:</strong></p>
+                    <ul>
+                        <li>Provide proper attribution when using this data</li>
+                        <li>Link back to threadinghistories.org</li>
+                        <li>Indicate if you've modified the data</li>
+                        <li>Share your work with us—we'd love to see what you create!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Version Information -->
+        <div class="row mt-4">
+            <div class="col-lg-10 mx-auto text-center">
+                <p class="text-muted small">
+                    <strong>Current Version:</strong> 1.0.0 | 
+                    <strong>Last Updated:</strong> December 15, 2024 | 
+                    <strong>Total Records:</strong> 12 locations
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="text-center text-white py-4 mt-5" style="background-color: #2C5F5D;">
