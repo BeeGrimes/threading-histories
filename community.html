@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Outreach - Threading Histories</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-teal: #2C7873;
+            --secondary-terracotta: #C96D5E;
+            --accent-cream: #F4E9DC;
+            --text-dark: #2D3142;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            background-color: var(--accent-cream);
+        }
+
+        .navbar {
+            background-color: var(--primary-teal);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cream) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-terracotta));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .content-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--primary-teal);
+            border-bottom: 3px solid var(--secondary-terracotta);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .submission-card {
+            border-left: 4px solid var(--primary-teal);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-container {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid var(--primary-teal);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-teal);
+            border-color: var(--primary-teal);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-terracotta);
+            border-color: var(--secondary-terracotta);
+        }
+
+        .alert-info {
+            background-color: var(--accent-cream);
+            border-color: var(--primary-teal);
+            color: var(--text-dark);
+        }
+
+        .required {
+            color: var(--secondary-terracotta);
+        }
+
+        /* Honeypot field - hidden from users but visible to bots */
+        .honeypot {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+        }
+
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Threading Histories</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="archive.html">Textile Archive</a></li>
+                    <li class="nav-item"><a class="nav-link" href="methodology.html">Methodology</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bibliography.html">Bibliography</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="community.html">Community Outreach</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Community Outreach & Collaboration</h1>
+            <p class="lead">Building connections, sharing knowledge, and growing together</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Left Column: Content -->
+            <div class="col-lg-7">
+                <!-- Introduction -->
+                <div class="content-section">
+                    <h2 class="section-title">Our Commitment to Community</h2>
+                    <p>Threading Histories is more than an academic project—it's a living archive that belongs to the communities whose histories it represents. We recognize that the knowledge systems of Nigerian women's textile traditions are not static historical artifacts but continue to thrive through contemporary artisans, cultural practitioners, and descendant communities.</p>
+                    
+                    <p>This project was built with the understanding that colonial archives, while valuable, represent only partial perspectives. We actively seek to center the voices, knowledge, and corrections of those most connected to these traditions.</p>
+                </div>
+
+                <!-- Who We Seek to Engage -->
+                <div class="content-section">
+                    <h2 class="section-title">Community Stakeholders</h2>
+                    <p>We welcome engagement from diverse community members, including:</p>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="submission-card">
+                                <h5>Nigerian Diaspora Communities</h5>
+                                <p>Individuals with family histories, oral traditions, and cultural knowledge of textile practices.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="submission-card">
+                                <h5>Contemporary Artisans</h5>
+                                <p>Textile practitioners continuing traditional techniques and innovating new forms.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="submission-card">
+                                <h5>Cultural Heritage Organizations</h5>
+                                <p>Museums, cultural centers, and preservation initiatives in Nigeria and internationally.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="submission-card">
+                                <h5>Scholars & Researchers</h5>
+                                <p>Historians, anthropologists, and researchers with specialized knowledge or archival materials.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Contribute -->
+                <div class="content-section">
+                    <h2 class="section-title">How to Contribute</h2>
+                    
+                    <h4>Submission Guidelines</h4>
+                    <p>We welcome the following types of contributions:</p>
+                    
+                    <ul>
+                        <li><strong>Oral Histories:</strong> Family stories, memories, and personal accounts of textile traditions</li>
+                        <li><strong>Corrections:</strong> Updates to location data, craft techniques, or historical narratives</li>
+                        <li><strong>Additional Sources:</strong> Photographs, documents, or archival materials not currently included</li>
+                        <li><strong>Contemporary Connections:</strong> Information about living traditions and contemporary artisans</li>
+                        <li><strong>Translation Assistance:</strong> Help with Yoruba, Igbo, Hausa, or other Nigerian language terms</li>
+                    </ul>
+
+                    <div class="alert alert-info mt-3">
+                        <strong>Important Note:</strong> All submissions will be reviewed for accuracy and relevance before inclusion. We will contact you to verify information and discuss proper attribution. Your contribution helps build a more complete and accurate historical record.
+                    </div>
+
+                    <h4 class="mt-4">Submission Process</h4>
+                    <ol>
+                        <li><strong>Submit Information:</strong> Use the contact form to share your contribution</li>
+                        <li><strong>Review & Verification:</strong> I will review submissions and may contact you for clarification</li>
+                        <li><strong>Attribution:</strong> We will work with you to determine appropriate credit and citation</li>
+                        <li><strong>Integration:</strong> Approved contributions will be added to the archive with acknowledgment</li>
+                        <li><strong>Notification:</strong> You'll be notified when your contribution is published</li>
+                    </ol>
+
+                    <h4 class="mt-4">Privacy & Permissions</h4>
+                    <p>By submitting information, you confirm that:</p>
+                    <ul>
+                        <li>You have the right to share any images or documents provided</li>
+                        <li>You consent to the inclusion of your contribution in this public archive</li>
+                        <li>You understand that this is an academic project and contributions will not be compensated monetarily</li>
+                        <li>You agree to the use of your name for attribution (or can request anonymity)</li>
+                    </ul>
+                </div>
+
+                <!-- Partnership Opportunities -->
+                <div class="content-section">
+                    <h2 class="section-title">Partnership Opportunities</h2>
+                    <p>I am actively seeking partnerships with organizations committed to preserving and promoting Nigerian cultural heritage. Potential collaboration areas include:</p>
+                    
+                    <ul>
+                        <li><strong>Research Collaboration:</strong> Joint research projects and data sharing</li>
+                        <li><strong>Educational Programming:</strong> Workshops, lectures, and teaching resources</li>
+                        <li><strong>Exhibition Development:</strong> Physical or digital exhibitions based on project data</li>
+                        <li><strong>Community Workshops:</strong> Skill-sharing sessions with contemporary artisans</li>
+                        <li><strong>Resource Development:</strong> Creating accessible educational materials</li>
+                    </ul>
+
+                    <p>Organizations of particular interest include Nigerian universities, cultural museums, textile societies, and heritage preservation initiatives.</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Contact Form -->
+            <div class="col-lg-5">
+                <div class="form-container sticky-top" style="top: 20px;">
+                    <h3 class="section-title">Get in Touch</h3>
+                    <p class="mb-4">Use this form to share contributions, request corrections, propose partnerships, or ask questions about the project.</p>
+
+                    <!-- Contact Form -->
+                    <form id="contactForm" action="https://formspree.io/f/xbdywnzk" method="POST">
+                        <!-- Honeypot field for spam prevention -->
+                        <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
+                        
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name <span class="required">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email <span class="required">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <!-- Affiliation -->
+                        <div class="mb-3">
+                            <label for="affiliation" class="form-label">Affiliation/Organization (Optional)</label>
+                            <input type="text" class="form-control" id="affiliation" name="affiliation">
+                            <small class="form-text text-muted">e.g., University, Museum, Community Organization, Independent Researcher</small>
+                        </div>
+
+                        <!-- Inquiry Type -->
+                        <div class="mb-3">
+                            <label for="inquiryType" class="form-label">Type of Inquiry <span class="required">*</span></label>
+                            <select class="form-select" id="inquiryType" name="inquiryType" required>
+                                <option value="">Select one...</option>
+                                <option value="submission">Submit Information/Data</option>
+                                <option value="correction">Report a Correction</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="question">General Question</option>
+                                <option value="permission">Permission Request</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message <span class="required">*</span></label>
+                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                            <small class="form-text text-muted">Please be as detailed as possible. Include specific locations, time periods, or sources if relevant.</small>
+                        </div>
+
+                        <!-- Attachment Note -->
+                        <div class="alert alert-info mb-3">
+                            <small><strong>Note:</strong> To share images or documents, please mention them in your message. I will follow up with secure file transfer instructions.</small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </div>
+
+                        <!-- Success/Error Messages -->
+                        <div id="formStatus" class="mt-3"></div>
+                    </form>
+
+                    <!-- Contact Information -->
+                    <div class="mt-4 pt-4 border-top">
+                        <h5>Project Contact</h5>
+                        <p><strong>Bryttany Grimes</strong><br>
+                        CHI Fellow, Michigan State University<br>
+                        <a href="mailto:grimesb4@msu.edu">grimesb4@msu.edu</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2025-2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
+            <p>
+                <a href="#" class="text-white me-3">Privacy Policy</a>
+                <a href="#" class="text-white">Terms of Use</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Form Validation Script -->
+    <script>
+        // Basic client-side form validation and UX
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Check if honeypot field is filled (indicates bot)
+            const honeypot = document.querySelector('.honeypot').value;
+            if (honeypot) {
+                e.preventDefault();
+                console.log('Spam detected');
+                return false;
+            }
+
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // The form will submit normally to Formspree
+            // Formspree will handle the redirect/confirmation
+        });
+    </script>
+</body>
+</html>
