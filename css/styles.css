@@ -594,3 +594,103 @@ h2, h3 {
 }
 
 /* End Data Download Section Styles */
+/* ============================================
+   DROPDOWN NAVIGATION STYLES
+   Add this to your css/styles.css file
+   ============================================ */
+
+/* Dropdown menu styling */
+.navbar .dropdown-menu {
+    background-color: #F4E9DC;
+    border: 1px solid #2C5F5D;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+}
+
+.navbar .dropdown-item {
+    color: #2D3142;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    background-color: #2C5F5D;
+    color: white;
+}
+
+.navbar .dropdown-item.active {
+    background-color: #2C5F5D;
+    color: white;
+}
+
+.navbar .dropdown-toggle::after {
+    margin-left: 0.3rem;
+    vertical-align: 0.15em;
+}
+
+/* Dropdown divider (if using Option B with landing pages) */
+.navbar .dropdown-divider {
+    border-top: 1px solid #2C5F5D;
+    opacity: 0.3;
+}
+
+/* Desktop: Show dropdown on hover for better UX */
+@media (min-width: 992px) {
+    .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+    
+    .navbar .dropdown-menu {
+        min-width: 200px;
+    }
+}
+
+/* Mobile: Different styling for collapsed navigation */
+@media (max-width: 991px) {
+    .navbar .dropdown-menu {
+        background-color: rgba(244, 233, 220, 0.1);
+        border: none;
+        padding-left: 1rem;
+        box-shadow: none;
+    }
+    
+    .navbar .dropdown-item {
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0.5rem 1rem;
+    }
+    
+    .navbar .dropdown-item:hover,
+    .navbar .dropdown-item:focus {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    
+    .navbar .dropdown-divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Smooth transitions */
+.navbar .dropdown-menu {
+    animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Active state for dropdown toggle when on child page */
+.navbar .dropdown.active .nav-link {
+    color: #F4E9DC !important;
+}

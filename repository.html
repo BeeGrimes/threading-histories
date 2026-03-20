@@ -214,27 +214,70 @@
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                                <h1 class="mb-0">Threading Histories</h1></a>
+    <!-- UNIVERSAL NAVIGATION CODE WITH DROPDOWNS -->
+<!-- Copy this navigation to ALL your pages -->
+<!-- Replace the entire <nav> section with this code -->
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="repository.html">Textile Repository</a></li>
-                    <li class="nav-item"><a class="nav-link" href="methodology.html">Methodology</a></li>
-                    <li class="nav-item"><a class="nav-link" href="bibliography.html">Bibliography</a></li>
-                    <li class="nav-item"><a class="nav-link" href="community.html">Community Outreach</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <h1 class="mb-0">Threading Histories</h1>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                
+                <!-- Interactive Map -->
+                <li class="nav-item">
+                    <a class="nav-link" href="map.html">Interactive Map</a>
+                </li>
+                
+                <!-- Textile Repository -->
+                <li class="nav-item">
+                    <a class="nav-link" href="repository.html">Textile Repository</a>
+                </li>
+                
+                <!-- Community Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Community
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                        <li><a class="dropdown-item" href="spotlight.html">Community Spotlight</a></li>
+                        <li><a class="dropdown-item" href="outreach.html">Community Outreach</a></li>
+                    </ul>
+                </li>
+                
+                <!-- About Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        About
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="methodology.html">Methodology</a></li>
+                        <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<!-- 
+IMPORTANT NOTES:
+1. This navigation uses "outreach.html" instead of "community.html"
+2. You MUST rename your current community.html to outreach.html
+3. Add the dropdown CSS from DROPDOWN_STYLES.css to your css/styles.css
+4. Make sure Bootstrap JS is loaded at the bottom of your page
+-->
 
     <!-- Page Header -->
     <div class="page-header">
