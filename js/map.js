@@ -43,14 +43,6 @@ const craftIcons = {
             <path d="M18 12 Q20 14 18 18" stroke="COLOR" stroke-width="1.5" fill="none"/>
         </svg>
     `,
-    'Basketry': `
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 24 L10 14 C10 10, 12 8, 16 8 C20 8, 22 10, 22 14 L22 24" stroke="COLOR" stroke-width="2" fill="none"/>
-            <line x1="10" y1="14" x2="22" y2="14" stroke="COLOR" stroke-width="2"/>
-            <line x1="10" y1="18" x2="22" y2="18" stroke="COLOR" stroke-width="2"/>
-            <line x1="10" y1="22" x2="22" y2="22" stroke="COLOR" stroke-width="2"/>
-        </svg>
-    `,
     'Beadwork': `
         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <circle cx="16" cy="10" r="3" fill="COLOR"/>
@@ -58,38 +50,6 @@ const craftIcons = {
             <circle cx="22" cy="16" r="3" fill="COLOR"/>
             <circle cx="16" cy="22" r="3" fill="COLOR"/>
             <circle cx="16" cy="16" r="2" fill="COLOR" opacity="0.5"/>
-        </svg>
-    `,
-    'Pottery': `
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 8 L12 10 C12 10, 10 12, 10 16 C10 20, 12 24, 16 24 C20 24, 22 20, 22 16 C22 12, 20 10, 20 10 L20 8 Z" fill="COLOR"/>
-            <ellipse cx="16" cy="8" rx="4" ry="1.5" fill="COLOR"/>
-            <line x1="12" y1="8" x2="12" y2="10" stroke="COLOR" stroke-width="1"/>
-            <line x1="20" y1="8" x2="20" y2="10" stroke="COLOR" stroke-width="1"/>
-        </svg>
-    `,
-    'Leatherwork': `
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="10" width="16" height="14" rx="2" fill="COLOR"/>
-            <circle cx="12" cy="14" r="1" fill="white"/>
-            <circle cx="16" cy="14" r="1" fill="white"/>
-            <circle cx="20" cy="14" r="1" fill="white"/>
-            <circle cx="12" cy="18" r="1" fill="white"/>
-            <circle cx="16" cy="18" r="1" fill="white"/>
-            <circle cx="20" cy="18" r="1" fill="white"/>
-            <circle cx="12" cy="22" r="1" fill="white"/>
-            <circle cx="16" cy="22" r="1" fill="white"/>
-            <circle cx="20" cy="22" r="1" fill="white"/>
-        </svg>
-    `,
-    'Textile Printing': `
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="12" width="16" height="12" fill="none" stroke="COLOR" stroke-width="2"/>
-            <path d="M12 8 L16 12 L20 8" fill="COLOR"/>
-            <circle cx="12" cy="16" r="1.5" fill="COLOR"/>
-            <circle cx="20" cy="16" r="1.5" fill="COLOR"/>
-            <circle cx="16" cy="20" r="1.5" fill="COLOR"/>
-            <rect x="14" y="16" width="4" height="2" fill="COLOR"/>
         </svg>
     `
 };
@@ -220,9 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load GeoJSON data
     async function loadMapData() {
         try {
-            console.log('Fetching GeoJSON data from: data/sample-locations.geojson');
+            console.log('Fetching GeoJSON data from: data/threading_histories_dataset.geojson');
             
-            const response = await fetch('data/sample-locations.geojson');
+            const response = await fetch('data/threading_histories_dataset.geojson');
             
             if (!response.ok) {
                 throw new Error(`Failed to load data: ${response.status}`);
@@ -352,7 +312,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .map(cb => cb.value);
         const selectedEthnic = Array.from(document.querySelectorAll('.ethnic-filter:checked'))
             .map(cb => cb.value);
-        const timePeriod = document.getElementById('timePeriodSelect').value;
         
         markerClusterGroup.clearLayers();
         
@@ -370,13 +329,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 show = false;
             }
             
-            if (timePeriod !== 'all') {
-                const [startYear, endYear] = timePeriod.split('-').map(Number);
-                if (props.time_period_end < startYear || props.time_period_start > endYear) {
-                    show = false;
-                }
-            }
-            
             if (show) {
                 markerClusterGroup.addLayer(item.marker);
                 visibleCount++;
@@ -391,8 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
         checkbox.addEventListener('change', applyFilters);
     });
 
-    document.getElementById('timePeriodSelect').addEventListener('change', applyFilters);
-
     // Reset filters
     document.getElementById('resetFilters').addEventListener('click', function() {
         console.log('Resetting filters...');
@@ -401,46 +351,8 @@ document.addEventListener('DOMContentLoaded', function() {
             cb.checked = true;
         });
         
-        document.getElementById('timePeriodSelect').value = 'all';
         applyFilters();
     });
-
-    // Temporal slider
-    const yearSlider = document.getElementById('yearSlider');
-    const currentYearDisplay = document.getElementById('currentYear');
-
-    yearSlider.addEventListener('input', function() {
-        const year = parseInt(this.value);
-        
-        if (year <= 1885) {
-            currentYearDisplay.textContent = '1850-1885';
-        } else if (year <= 1920) {
-            currentYearDisplay.textContent = '1885-1920';
-        } else {
-            currentYearDisplay.textContent = '1920-1960';
-        }
-        
-        filterByYear(year);
-    });
-
-    function filterByYear(year) {
-        console.log(`Filtering by year: ${year}`);
-        
-        markerClusterGroup.clearLayers();
-        
-        let visibleCount = 0;
-        
-        allMarkers.forEach(item => {
-            const props = item.properties;
-            
-            if (year >= props.time_period_start && year <= props.time_period_end) {
-                markerClusterGroup.addLayer(item.marker);
-                visibleCount++;
-            }
-        });
-        
-        console.log(`${visibleCount} markers visible in year ${year}`);
-    }
 
     // Initialize the map
     loadMapData();
