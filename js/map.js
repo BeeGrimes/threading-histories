@@ -143,9 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     "></div>
                 </div>
             `,
-            iconSize: [32, 40],
-            iconAnchor: [16, 40],
-            popupAnchor: [0, -40]
+            iconSize: [48, 58],
+            iconAnchor: [24, 58],
+            popupAnchor: [0, -58]
         });
         
         const marker = L.marker(latLng, { 
