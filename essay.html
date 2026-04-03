@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpretive Essay - Threading Histories</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        /* ============================================
+           ESSAY PAGE STYLES
+           ============================================ */
+
+        /* Page Header */
+        .essay-header {
+            background: linear-gradient(135deg, #2C7873, #C96D5E);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 0;
+        }
+
+        .essay-header h1 {
+            font-size: 3rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+        }
+
+        .essay-header .lead {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .essay-byline {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .toc-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #2C5F5D;
+        }
+
+        .toc-card h5 {
+            color: #2C5F5D;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: #2D3142;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: block;
+            padding: 0.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .toc-list a:hover {
+            color: #2C5F5D;
+            border-bottom-color: #C96D5E;
+        }
+
+        .toc-list .toc-section {
+            font-weight: 600;
+            color: #2C5F5D;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        /* Essay Body */
+        .essay-body {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .essay-body h2 {
+            color: #2C5F5D;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #C96D5E;
+        }
+
+        .essay-body h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .essay-body h3 {
+            color: #2C5F5D;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .essay-body p {
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+            color: #2D3142;
+            font-size: 1.05rem;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 4px solid #C96D5E;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background-color: rgba(244, 233, 220, 0.5);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pull-quote p {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #2C5F5D;
+            margin: 0;
+        }
+
+        .pull-quote cite {
+            display: block;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        /* Footnote / Citation style */
+        .essay-body .footnote {
+            font-size: 0.85rem;
+            color: #6c757d;
+            vertical-align: super;
+        }
+
+        /* Placeholder notice */
+        .placeholder-notice {
+            background-color: rgba(212, 116, 78, 0.1);
+            border: 1px dashed #C96D5E;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .placeholder-notice i {
+            color: #C96D5E;
+            margin-right: 0.5rem;
+        }
+
+        /* Footnotes section */
+        .footnotes-section {
+            border-top: 1px solid #dee2e6;
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+
+        .footnotes-section h2 {
+            font-size: 1.25rem;
+        }
+
+        .footnotes-section ol {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            .toc-sidebar {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+
+            .essay-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .essay-header h1 {
+                font-size: 2.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <h1 class="mb-0">Threading Histories</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="map.html">Interactive Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="repository.html">Textile Repository</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Community
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                        <li><a class="dropdown-item" href="spotlight.html">Community Spotlight</a></li>
+                        <li><a class="dropdown-item" href="outreach.html">Community Outreach</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        About
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="methodology.html">Methodology</a></li>
+                        <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
+                        <li><a class="dropdown-item active" href="essay.html">Interpretive Essay</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<div class="essay-header">
+    <div class="container text-center">
+        <h1>Interpretive Essay</h1>
+        <p class="lead">Threading Together Knowledge, Place, and Colonial History</p>
+        <p class="essay-byline">Bryttany Grimes | CHI Fellowship, Michigan State University | 2026</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="container my-5">
+    <div class="row">
+
+        <!-- Table of Contents Sidebar -->
+        <div class="col-lg-3 order-lg-2">
+            <div class="toc-sidebar">
+                <div class="toc-card">
+                    <h5><i class="fas fa-list me-2"></i>Contents</h5>
+                    <ul class="toc-list">
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li class="toc-section">I. The Archive and Its Absences</li>
+                        <li><a href="#archival-problem">The Archival Problem</a></li>
+                        <li><a href="#reading-against-grain">Reading Against the Grain</a></li>
+                        <li class="toc-section">II. Women's Labor and Colonial Disruption</li>
+                        <li><a href="#knowledge-systems">Textile Knowledge Systems</a></li>
+                        <li><a href="#colonial-impact">Colonial Economic Impact</a></li>
+                        <li class="toc-section">III. The Digital Intervention</li>
+                        <li><a href="#why-digital">Why Digital Humanities?</a></li>
+                        <li><a href="#mapping-choices">Mapping as Method</a></li>
+                        <li><a href="#community">Community and the Archive</a></li>
+                        <li class="toc-section">IV. Conclusion</li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                        <li><a href="#footnotes">Footnotes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Essay Body -->
+        <div class="col-lg-9 order-lg-1">
+            <div class="essay-body">
+
+                <div class="placeholder-notice">
+                    <i class="fas fa-pencil-alt"></i>
+                    This page is a structured template ready for your writing. Replace each placeholder paragraph with your own text following the outline provided. The section headings, pull quote boxes, and footnote structure are already in place.
+                </div>
+
+                <!-- Introduction -->
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <p>
+                        [Write your opening paragraph here. Introduce the central argument of the essay — that Nigerian women's textile traditions represent sophisticated knowledge systems that were deliberately disrupted by British colonial economic policy, and that digital humanities methods offer a way to recover and visualize this history that traditional scholarship cannot.]
+                    </p>
+                    <p>
+                        [Continue the introduction by establishing the stakes of the project. Who has been left out of existing scholarship? What does this project do differently? Introduce the geographic and temporal scope: Nigeria, 1850–1960.]
+                    </p>
+                    <p>
+                        [Close the introduction with a brief roadmap of the essay's sections.]
+                    </p>
+                </section>
+
+                <!-- Section I -->
+                <section id="archival-problem">
+                    <h2>I. The Archive and Its Absences</h2>
+                    <h3>The Archival Problem</h3>
+                    <p>
+                        [Discuss the colonial archive as both a resource and a site of erasure. Explain how British colonial records, missionary accounts, and trade reports were produced by observers with specific agendas that minimized or misrepresented women's labor and expertise.]
+                    </p>
+                    <p>
+                        [Draw on the specific archives you are using — the Colonial Office records, Rhodes House Library, British Museum — and reflect on what their silences reveal as much as what they document.]
+                    </p>
+
+                    <div class="pull-quote">
+                        <p>"[Insert a relevant quotation from one of your sources here — a moment where the archive reveals its own bias, or where a scholar articulates the problem of reading colonial records.]"</p>
+                        <cite>— Author Name, <em>Source Title</em>, Year</cite>
+                    </div>
+                </section>
+
+                <section id="reading-against-grain">
+                    <h3>Reading Against the Grain</h3>
+                    <p>
+                        [Explain your methodology for working with colonial archives. Define what it means to read "against the grain" — finding evidence of women's expertise, economic agency, and cultural knowledge in sources that were not designed to document these things.]
+                    </p>
+                    <p>
+                        [Connect this to broader historiographical conversations about colonial archival bias, drawing on scholars like Ifi Amadiume, whose work on African women's history informs your approach.]
+                    </p>
+                </section>
+
+                <!-- Section II -->
+                <section id="knowledge-systems">
+                    <h2>II. Women's Labor and Colonial Disruption</h2>
+                    <h3>Textile Knowledge Systems</h3>
+                    <p>
+                        [Discuss what textile production meant as a knowledge system — not merely an economic activity but an intergenerational transmission of technical expertise, aesthetic judgment, and cultural identity. Draw on specific examples from your ten markers: adire dyeing in Abeokuta, aso oke weaving in Iseyin, Akwete cloth in the Igbo region, embroidery in Zaria.]
+                    </p>
+                    <p>
+                        [Explain how these traditions varied across ethnolinguistic groups — Yoruba, Igbo, and Hausa — and how geography, trade networks, and political structures shaped each tradition differently.]
+                    </p>
+                </section>
+
+                <section id="colonial-impact">
+                    <h3>Colonial Economic Impact</h3>
+                    <p>
+                        [Discuss the specific mechanisms by which British colonialism disrupted textile knowledge systems: the flooding of Nigerian markets with imported factory cloth, colonial taxation that forced labor away from craft production, missionary discouragement of ceremonial textile traditions, and the dismantling of political structures (such as the Hausa emirate system) that had sustained craft patronage.]
+                    </p>
+                    <p>
+                        [Emphasize that this disruption was a process rather than a single event — one that unfolded differently across regions, ethnic groups, and time periods. This is a central argument of the project and justifies the temporal dimension of the map.]
+                    </p>
+
+                    <div class="pull-quote">
+                        <p>"[Insert a quotation here that speaks to the economic or cultural impact of colonial policies on Nigerian women's craft production.]"</p>
+                        <cite>— Author Name, <em>Source Title</em>, Year</cite>
+                    </div>
+                </section>
+
+                <!-- Section III -->
+                <section id="why-digital">
+                    <h2>III. The Digital Intervention</h2>
+                    <h3>Why Digital Humanities?</h3>
+                    <p>
+                        [Make the argument for why this project needed to be digital. Traditional scholarly publications present linear arguments that cannot capture the spatial and temporal complexity of how colonial disruption spread across Nigeria. Geospatial mapping allows you to show change as a process distributed across geography.]
+                    </p>
+                    <p>
+                        [Reflect on how the interactive map makes visible patterns that would be invisible in a monograph — the geographic clustering of certain craft traditions, the differential impact of colonialism on different regions, the contrast between thriving and declining traditions at the same moment in time.]
+                    </p>
+                </section>
+
+                <section id="mapping-choices">
+                    <h3>Mapping as Method</h3>
+                    <p>
+                        [Discuss the specific methodological choices you made in building the map and why they matter. Why did you choose to represent colonial impact through color (status) rather than through timeline filtering? What does it mean to pin a craft tradition to a geographic point when that tradition was practiced across a wide region?]
+                    </p>
+                    <p>
+                        [Reflect on the limitations of the map as a form — what it cannot represent, where it simplifies, and how you have tried to be transparent about those limitations in your methodology page and marker descriptions.]
+                    </p>
+                </section>
+
+                <section id="community">
+                    <h3>Community and the Living Archive</h3>
+                    <p>
+                        [Discuss the Community Spotlight feature and what it represents methodologically. Explain why centering contemporary voices alongside historical records is not merely an addition to the project but a corrective to the colonial archive's temporal framing — the idea that these traditions are historical artifacts rather than living practices.]
+                    </p>
+                    <p>
+                        [Reflect on the responsibilities that come with building a digital archive about communities you are not a member of, and how you have tried to approach that ethically through attribution, open data, and an invitation to community correction.]
+                    </p>
+                </section>
+
+                <!-- Conclusion -->
+                <section id="conclusion">
+                    <h2>Conclusion</h2>
+                    <p>
+                        [Bring the essay's arguments together. Restate your central claim about Nigerian women's textile knowledge systems and colonialism, and explain what the digital platform adds to our understanding of that history.]
+                    </p>
+                    <p>
+                        [Look forward — what does this project make possible that wasn't possible before? What questions does it open that future scholars, community members, or archivists might pursue?]
+                    </p>
+                    <p>
+                        [Close with a reflection on the stakes of this kind of work — why recovering and centering women's labor in African history matters, and what digital humanities can contribute to that broader project.]
+                    </p>
+                </section>
+
+                <!-- Footnotes -->
+                <section id="footnotes" class="footnotes-section">
+                    <h2>Footnotes</h2>
+                    <ol>
+                        <li>[Footnote 1 — add citations using Chicago author-date or notes format as you write]</li>
+                        <li>[Footnote 2]</li>
+                        <li>[Footnote 3]</li>
+                    </ol>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer style="background-color: #2D3142; color: white; padding: 2rem 0; margin-top: 4rem;">
+    <div class="container text-center">
+        <p>&copy; 2025-2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
+        <p>
+            <a href="#" class="text-white me-3">Privacy Policy</a>
+            <a href="#" class="text-white">Terms of Use</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Smooth scroll for table of contents links -->
+<script>
+    document.querySelectorAll('.toc-list a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
