@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize map centered on Nigeria with restricted bounds
     const map = L.map('map', {
         center: [9.0820, 8.6753],
-        zoom: 6,
+        zoom: 7.5,
         minZoom: 6,
         maxZoom: 18,
         maxBounds: nigeriaBounds,
