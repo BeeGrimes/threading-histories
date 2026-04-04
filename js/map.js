@@ -216,6 +216,20 @@ document.addEventListener('DOMContentLoaded', function() {
          if (allMarkers.length > 0) {
                 map.setView([9.0820, 8.6753], 7);
             }
+           // Check if page was opened from repository link
+            const urlParams = new URLSearchParams(window.location.search);
+            const locationId = urlParams.get('location');
+            
+            if (locationId) {
+                const target = allMarkers.find(m => m.properties.location_id === locationId);
+                if (target) {
+                    const coords = target.marker.getLatLng();
+                    map.setView([coords.lat, coords.lng], 9);
+                    setTimeout(function() {
+                        target.marker.openPopup();
+                    }, 500);
+                }
+            } 
             
         } catch (error) {
             console.error('ERROR loading map data:', error);
