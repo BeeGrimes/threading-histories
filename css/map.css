@@ -302,3 +302,82 @@
 .navbar .dropdown-menu {
     z-index: 2001;
 }
+/* ============================================
+   MARKER IMAGE CAROUSEL
+   ============================================ */
+
+.marker-carousel {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.carousel-images {
+    position: relative;
+    width: 100%;
+    height: 220px;
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide.active {
+    display: block;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+    margin: 0;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #2C5F5D;
+    border-radius: 0 0 8px 8px;
+}
+
+.carousel-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.carousel-counter {
+    color: white;
+    font-size: 0.85rem;
+    min-width: 40px;
+    text-align: center;
+}
+.carousel-caption {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #666;
+    text-align: center;
+    padding: 0.4rem 0.75rem 0.25rem;
+    margin: 0;
+    background-color: #f8f8f8;
+}

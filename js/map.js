@@ -264,6 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img src="images/marker/${img}"
                                  alt="${props.location_name} — image ${i + 1}"
                                  onerror="this.parentElement.style.display='none'">
+                            <p class="carousel-caption">${props.image_credit || 'Source not recorded'}</p>
                         </div>
                     `).join('')}
                 </div>
