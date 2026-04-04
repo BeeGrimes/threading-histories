@@ -14,9 +14,9 @@
         "status": "Thriving",
         "description": "Abeokuta was a major center of Yoruba indigo dyeing. Women's cooperative societies controlled production and trade, with adire cloth distributed throughout the region. Artisans developed sophisticated resist-dyeing techniques including adire eleko (starch resist) and adire oniko (tied resist).",
         "historical_context": "Abeokuta was founded as a refuge city in the 1830s and became a major textile center by the mid-19th century. Women's dyeing cooperatives were central to the local economy.",
-        "colonial_impact": "No significant colonial disruption documented before 1886. British presence from the late 19th century introduced imported European dyes that began competing with traditional indigo production.",
-        "source_citation": "Byfield, Judith A. The Bluest Hands: A Social and Economic History of Women Dyers in Abeokuta, Nigeria, 1890-1940. Heinemann, 2002. | British Colonial Office Records, CO 147 series, National Archives UK.",
-        "image_marker": "",
+        "colonial_impact": "No significant colonial disruption documented before 1886. British presence from the late 19th century introduced imported European dyes that began competing with traditional indigo production, though women's cooperatives adapted and persisted.",
+        "source_citation": "Byfield, Judith A. The Bluest Hands: A Social and Economic History of Women Dyers in Abeokuta, Nigeria, 1890-1940. Heinemann, 2002. | British Colonial Office Records, CO 147 series, National Archives UK. | Image: 'Funmilayo Ransome-Kuti And The Massive Abeokuta Women Revolt,' History publication.",
+        "image_marker": "abeokuta-women-yoruba.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -38,8 +38,8 @@
         "description": "Lagos served as a major center for Yoruba indigo dyeing traditions. Women artisans developed sophisticated resist-dyeing techniques and the city's coastal location facilitated strong trade networks extending throughout the region and beyond.",
         "historical_context": "Lagos's position as a major port city made it a hub for textile trade. Women artisans connected local craft production to regional and Atlantic markets.",
         "colonial_impact": "Introduction of imported European dyes in the 1880s began to compete with traditional indigo production. However, local demand remained strong through this period.",
-        "source_citation": "British Museum Collection 1892.5.14. | Colonial Office Records CO 147/89, National Archives UK. | Aronson, Lisa. 'African Women in the Visual Arts.' Signs 16, no. 3 (1991): 550-574.",
-        "image_marker": "",
+        "source_citation": "British Museum Collection 1892.5.14. | Colonial Office Records CO 147/89, National Archives UK. | Aronson, Lisa. 'African Women in the Visual Arts.' Signs 16, no. 3 (1991): 550-574. | Image: 'Pre-independence Yoruba Women - Culture - Nigeria.'",
+        "image_marker": "women-in-lagos.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -61,8 +61,8 @@
         "description": "Ibadan became a significant center for adire production in the early 20th century. Women artisans developed new designs and adapted techniques to meet changing colonial-era markets, demonstrating resilience and creative innovation under economic pressure.",
         "historical_context": "As a major inland Yoruba city, Ibadan sat at the intersection of trade routes connecting the coast to the interior, making it well-positioned as a textile production and distribution center.",
         "colonial_impact": "The colonial economy created new demand from European administrators and missionaries. However, imported textiles increasingly competed for market share from the 1910s onward.",
-        "source_citation": "Byfield, Judith A. The Bluest Hands. Heinemann, 2002. | Field Museum Collections, Chicago. | Oral histories collected by University of Ibadan, Institute of African Studies.",
-        "image_marker": "",
+        "source_citation": "Byfield, Judith A. The Bluest Hands. Heinemann, 2002. | Field Museum Collections, Chicago. | Oral histories collected by University of Ibadan, Institute of African Studies. | Images: 'Ibadan Woman,' Juju Films; Wikimedia Commons.",
+        "image_marker": "ibadan-market-women.jpg, ibadan-women-street.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -84,8 +84,8 @@
         "description": "Iseyin specialized in aso oke production, where narrow strips of cloth were woven on horizontal treadle looms and sewn together to create prestigious ceremonial garments. Women prepared thread and managed dyeing processes, while controlling quality and distribution.",
         "historical_context": "Iseyin had a long tradition of weaving among Yoruba women. Women's guilds controlled production and maintained quality standards across generations.",
         "colonial_impact": "Demand remained steady through the colonial period due to aso oke's essential role in Yoruba life cycle ceremonies including weddings, funerals, and chieftaincy installations.",
-        "source_citation": "Picton, John. 'What's in a Name? Geography, Identity and the Misappropriation of Aso Oke.' African Arts 34, no. 3 (2001): 52-57. | Renne, Elisha P. Cloth That Does Not Die. University of Washington Press, 1995. | British Museum textile collection.",
-        "image_marker": "",
+        "source_citation": "Picton, John. 'What's in a Name? Geography, Identity and the Misappropriation of Aso Oke.' African Arts 34, no. 3 (2001): 52-57. | Renne, Elisha P. Cloth That Does Not Die. University of Washington Press, 1995. | British Museum textile collection. | Image: 'Nigerian Women Struggling To Keep Traditional Cloth Weaving From Extinction,' Pulitzer Center.",
+        "image_marker": "aso-oke-iseyin-weaving.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -107,8 +107,8 @@
         "description": "Oyo had a sophisticated beadwork tradition deeply connected to the Oyo Empire's royal court culture. Women artisans created elaborate beaded objects for royal regalia and ceremonial use. Through the colonial period, production adapted toward market-oriented goods while maintaining traditional techniques.",
         "historical_context": "The Oyo Empire had maintained sophisticated beadwork traditions for centuries. After the empire's collapse in the 1830s, Oyo artisans preserved these practices within a restructured political context.",
         "colonial_impact": "Beadwork maintained through the colonial period but production gradually shifted toward the tourist and export market, altering the cultural contexts in which pieces were made.",
-        "source_citation": "Smithsonian National Museum of African Art, West African collections. | National Museum Lagos. | Johnson, Samuel. The History of the Yorubas. Routledge, 1921.",
-        "image_marker": "",
+        "source_citation": "Smithsonian National Museum of African Art, West African collections. | National Museum Lagos. | Johnson, Samuel. The History of the Yorubas. Routledge, 1921. | Image: Wikimedia Commons.",
+        "image_marker": "oyo-women-ceremony.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -129,9 +129,9 @@
         "status": "Thriving",
         "description": "The town of Akwete gave its name to a distinctive weaving tradition practiced exclusively by women. Using vertical looms, artisans created complex geometric and figurative patterns in bright colors. Akwete cloth held significant cultural and economic value, worn during important ceremonies and marking social status.",
         "historical_context": "Akwete weaving was transmitted through family lines, with technique and design knowledge passed from mother to daughter. The community's identity was deeply tied to its weaving tradition.",
-        "colonial_impact": "Despite colonial disruption elsewhere, Akwete weaving remained economically viable throughout the colonial period due to strong local and regional demand for ceremonial cloth.",
-        "source_citation": "Cole, Herbert M. and Chike C. Aniakor. Igbo Arts: Community and Cosmos. UCLA Museum of Cultural History, 1984. | Smithsonian NMAFA 85-15-23. | Anthropological surveys, 1930s, University of Nigeria Nsukka archives.",
-        "image_marker": "",
+        "colonial_impact": "Despite colonial disruption to other crafts, Akwete weaving remained economically viable throughout the colonial period due to strong local and regional demand for ceremonial cloth.",
+        "source_citation": "Cole, Herbert M. and Chike C. Aniakor. Igbo Arts: Community and Cosmos. UCLA Museum of Cultural History, 1984. | Smithsonian NMAFA 85-15-23. | Anthropological surveys, 1930s, University of Nigeria Nsukka archives. | Image: Wikimedia Commons.",
+        "image_marker": "igbo-women-akwete.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -153,8 +153,8 @@
         "description": "Igbo women in the Asaba region produced colorful woven textiles with complex geometric patterns using vertical loom techniques. During this period, local markets remained robust and demand for traditionally woven cloth was strong across the region.",
         "historical_context": "The Asaba area participated in the broader Igbo weaving tradition connected to the Niger Delta trade networks, giving women artisans access to both materials and markets.",
         "colonial_impact": "The early colonial period saw continued strong local demand. Significant disruption came later with the spread of imported factory cloth in the early 20th century.",
-        "source_citation": "Cole, Herbert M. and Chike C. Aniakor. Igbo Arts. UCLA Museum of Cultural History, 1984. | Colonial Trade Reports, National Archives UK. | Perani, Judith and Norma H. Wolff. Cloth, Dress, and Art Patronage in Africa. Berg Publishers, 1999.",
-        "image_marker": "",
+        "source_citation": "Cole, Herbert M. and Chike C. Aniakor. Igbo Arts. UCLA Museum of Cultural History, 1984. | Colonial Trade Reports, National Archives UK. | Perani, Judith and Norma H. Wolff. Cloth, Dress, and Art Patronage in Africa. Berg Publishers, 1999. | Image: Wikimedia Commons.",
+        "image_marker": "asaba-women-vegetables.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -176,8 +176,8 @@
         "description": "Nsukka women produced ceremonial cloths used in traditional religious practices, combining textile production with other craft forms. These textiles held deep spiritual significance within Igbo community life and were central to rites of passage and ancestral ceremonies.",
         "historical_context": "The Nsukka region maintained a distinctive Igbo cultural tradition in which women's craft production was interwoven with spiritual and communal life.",
         "colonial_impact": "Christian missionary activity from the 1900s actively discouraged traditional religious practices, significantly reducing demand for ceremonial textiles and disrupting the knowledge networks that sustained production.",
-        "source_citation": "Amadiume, Ifi. Male Daughters, Female Husbands. Zed Books, 1987. | Missionary Records, Presbyterian Historical Society. | Rhodes House Library, Oxford, MSS. Afr. s. 1872. | Nsukka Cultural Center archives.",
-        "image_marker": "",
+        "source_citation": "Amadiume, Ifi. Male Daughters, Female Husbands. Zed Books, 1987. | Missionary Records, Presbyterian Historical Society. | Rhodes House Library, Oxford, MSS. Afr. s. 1872. | Nsukka Cultural Center archives. | Image: Wikimedia Commons.",
+        "image_marker": "nsukka-women-market.png",
         "image_repository": ""
       },
       "geometry": {
@@ -196,11 +196,11 @@
         "time_period_start": 1850,
         "time_period_end": 1900,
         "status": "Thriving",
-        "description": "Kano's famous dyeing pits, some over 500 years old, produced indigo-dyed textiles traded across the Sahara. While men operated the dye pits, women were integral to preparatory work, pattern creation, and the marketing of finished cloth. The city was the region's dominant textile export center.",
+        "description": "Kano's famous dyeing pits, some over 500 years old, produced indigo-dyed textiles traded across the Sahara. While men operated the large dye vats, women were integral to preparatory work, pattern creation, and marketing of finished cloth. The city was the region's dominant textile export center.",
         "historical_context": "Kano was a major Saharan trade terminus whose textile economy connected sub-Saharan Africa to North African and Mediterranean markets. Textile production was central to the city's identity and wealth.",
         "colonial_impact": "British colonial tax policies from 1903 onward affected pricing structures. Introduction of synthetic dyes in the late 1890s began to alter production methods, though traditional techniques persisted among specialist artisans.",
-        "source_citation": "Kriger, Colleen E. Cloth in West African History. AltaMira Press, 2006. | British Museum, West African Textiles Collection, 1899.Af.23. | Colonial Office CO 446/7, National Archives UK. | Birmingham Museum historical photographs.",
-        "image_marker": "",
+        "source_citation": "Kriger, Colleen E. Cloth in West African History. AltaMira Press, 2006. | British Museum, West African Textiles Collection, 1899.Af.23. | Colonial Office CO 446/7, National Archives UK. | Images: Smithsonian Eliot Elisofon Photographic Archives; Wikimedia Commons.",
+        "image_marker": "hausa-people-kano.jpg, kano-women-market.jpg",
         "image_repository": ""
       },
       "geometry": {
@@ -222,8 +222,8 @@
         "description": "Zaria was a major center of Hausa embroidery, particularly the elaborate hand embroidery applied to prestige robes and ceremonial garments. Women were central to thread preparation, finishing, and quality control, with knowledge passed through established craft networks connected to the emirate court.",
         "historical_context": "As one of the Hausa Fulani emirate capitals, Zaria supported a sophisticated court culture in which embroidered textiles marked political authority and social rank. The emirate system organized and patronized craft production.",
         "colonial_impact": "British colonial administration after 1900 disrupted emirate patronage structures that had sustained high-status embroidery production. Demand shifted gradually toward less elaborate commercial embroidery for broader markets.",
-        "source_citation": "Kriger, Colleen E. Cloth in West African History. AltaMira Press, 2006. | Perani, Judith and Norma H. Wolff. Cloth, Dress, and Art Patronage in Africa. Berg Publishers, 1999. | Smithsonian NMAFA, Hausa embroidered garments collection. | Colonial Office CO 446 series, National Archives UK.",
-        "image_marker": "",
+        "source_citation": "Kriger, Colleen E. Cloth in West African History. AltaMira Press, 2006. | Perani, Judith and Norma H. Wolff. Cloth, Dress, and Art Patronage in Africa. Berg Publishers, 1999. | Smithsonian NMAFA, Hausa embroidered garments collection. | Colonial Office CO 446 series, National Archives UK. | Images: Wikimedia Commons.",
+        "image_marker": "zaria-women.jpg, zaria-womne-market.jpg",
         "image_repository": ""
       },
       "geometry": {
