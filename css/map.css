@@ -293,3 +293,12 @@
 .leaflet-marker-icon {
     cursor: pointer !important;
 }
+/* Ensure navbar and dropdowns sit above Leaflet map layers */
+.navbar {
+    position: relative;
+    z-index: 2000;
+}
+
+.navbar .dropdown-menu {
+    z-index: 2001;
+}
