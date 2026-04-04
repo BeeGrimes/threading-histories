@@ -93,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
         maxClusterRadius: 50,
         spiderfyOnMaxZoom: true,
         showCoverageOnHover: false,
-        disableClusteringAtZoom: 10
+        disableClusteringAtZoom: 10,
+        animateAddingMarkers: false
     });
 
     // ============================================
@@ -173,6 +174,19 @@ document.addEventListener('DOMContentLoaded', function() {
         marker.properties = props;
         return marker;
     }
+    marker.on('click', function() {
+            setTimeout(function() {
+                marker.openPopup();
+            }, 50);
+        });
+
+        marker.bindPopup(popupContent, {
+            maxWidth: 300,
+            className: 'custom-popup',
+            autoPan: true,
+            autoPanPaddingTopLeft: L.point(10, 80),
+            autoPanPaddingBottomRight: L.point(10, 10)
+        });
 
     // ============================================
     // LOAD GEOJSON DATA
