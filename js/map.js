@@ -213,9 +213,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`✓ Successfully loaded ${allMarkers.length} markers`);
             console.log('Marker cluster group added to map');
             
-            if (allMarkers.length > 0) {
-                const group = new L.featureGroup(allMarkers.map(m => m.marker));
-                map.fitBounds(group.getBounds().pad(0.2));
+         if (allMarkers.length > 0) {
+                map.setView([9.0820, 8.6753], 7);
             }
             
         } catch (error) {
