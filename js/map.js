@@ -162,9 +162,12 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        marker.bindPopup(popupContent, {
+      marker.bindPopup(popupContent, {
             maxWidth: 300,
-            className: 'custom-popup'
+            className: 'custom-popup',
+            autoPan: true,
+            autoPanPaddingTopLeft: L.point(10, 80),
+            autoPanPaddingBottomRight: L.point(10, 10)
         });
 
         marker.properties = props;
