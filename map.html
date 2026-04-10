@@ -430,5 +430,134 @@ function copyCitation() {
     
     <!-- Custom Map JavaScript -->
     <script src="js/map.js"></script>
+    <!-- ============================================
+     WELCOME MODAL
+     Paste this directly before </body>
+     ============================================ -->
+
+<div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border: none; border-radius: 12px; overflow: hidden;">
+
+            <!-- Modal Header -->
+            <div class="modal-header" style="background: linear-gradient(135deg, #2C7873, #C96D5E); border: none; padding: 1.75rem 2rem;">
+                <div>
+                    <h4 class="modal-title mb-1" id="welcomeModalLabel" style="color: white; font-family: Georgia, serif;">
+                        Welcome to Threading Histories
+                    </h4>
+                    <p class="mb-0" style="color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+                        Mapping Nigerian Women's Textile Traditions, 1850–1960
+                    </p>
+                </div>
+                <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body" style="padding: 2rem; background-color: #FDFCF8;">
+
+                <!-- Project Introduction -->
+                <p style="color: #2D3142; line-height: 1.75;">
+                    This interactive map documents how British colonialism disrupted traditional textile 
+                    knowledge systems across Yoruba, Igbo, and Hausa communities in Nigeria. Each marker 
+                    represents a craft tradition — explore them to uncover the women, techniques, and 
+                    histories behind the cloth.
+                </p>
+
+                <hr style="border-color: #F4E9DC; margin: 1.25rem 0;">
+
+                <!-- How to Use -->
+                <h6 style="color: #2C5F5D; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">
+                    How to Use This Map
+                </h6>
+
+                <div class="row g-3">
+
+                    <!-- Step 1 -->
+                    <div class="col-md-6">
+                        <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #2C5F5D; height: 100%;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                                <span style="background-color: #2C5F5D; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;">1</span>
+                                <strong style="color: #2C5F5D;">Read the Markers</strong>
+                            </div>
+                            <p style="color: #555; font-size: 0.88rem; margin: 0; line-height: 1.6;">
+                                Each marker's <strong>shape</strong> indicates craft type 
+                                (weaving, dyeing, embroidery, beadwork) and its 
+                                <strong>color</strong> indicates status — teal for thriving, 
+                                warm brown for stable, terracotta for declining.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="col-md-6">
+                        <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #2C5F5D; height: 100%;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                                <span style="background-color: #2C5F5D; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;">2</span>
+                                <strong style="color: #2C5F5D;">Filter the Map</strong>
+                            </div>
+                            <p style="color: #555; font-size: 0.88rem; margin: 0; line-height: 1.6;">
+                                Use the <strong>left panel</strong> to filter by craft type 
+                                or ethnolinguistic group. Uncheck any category to hide those 
+                                markers and focus your exploration.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="col-md-6">
+                        <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #E76F51; height: 100%;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                                <span style="background-color: #E76F51; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;">3</span>
+                                <strong style="color: #2C5F5D;">Explore a Location</strong>
+                            </div>
+                            <p style="color: #555; font-size: 0.88rem; margin: 0; line-height: 1.6;">
+                                Click any marker to open a summary popup, then select 
+                                <strong>View Details</strong> to open the full side panel — 
+                                with history, context, colonial impact, and sources.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="col-md-6">
+                        <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #E76F51; height: 100%;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                                <span style="background-color: #E76F51; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;">4</span>
+                                <strong style="color: #2C5F5D;">Browse the Repository</strong>
+                            </div>
+                            <p style="color: #555; font-size: 0.88rem; margin: 0; line-height: 1.6;">
+                                Visit the <a href="repository.html" style="color: #E76F51;">Textile Repository</a> 
+                                to search and filter all traditions with full metadata — 
+                                each entry links directly back to its map marker.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer" style="background-color: #F4F1DE; border-top: 1px solid #e8e0d0; padding: 1rem 2rem; justify-content: space-between; align-items: center;">
+
+                <!-- Don't show again checkbox -->
+                <div class="form-check mb-0">
+                    <input class="form-check-input" type="checkbox" id="dontShowAgain"
+                           style="border-color: #2C5F5D; cursor: pointer;">
+                    <label class="form-check-label" for="dontShowAgain"
+                           style="color: #666; font-size: 0.88rem; cursor: pointer;">
+                        Don't show this again
+                    </label>
+                </div>
+
+                <!-- Explore button -->
+                <button type="button" class="btn" data-bs-dismiss="modal"
+                        style="background-color: #2C5F5D; color: white; padding: 0.5rem 1.5rem; border-radius: 6px; font-weight: 500;">
+                    Explore the Map
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
