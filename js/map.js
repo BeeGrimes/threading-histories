@@ -447,3 +447,31 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✓ Map initialization complete');
 
 }); // End DOMContentLoaded
+// ============================================
+// WELCOME MODAL
+// Shows on first visit. Respects "Don't show
+// again" preference stored in localStorage.
+// ============================================
+
+(function() {
+    const STORAGE_KEY = 'threadingHistories_hideWelcome';
+
+    // If user previously checked "Don't show again", skip the modal
+    if (localStorage.getItem(STORAGE_KEY) === 'true') return;
+
+    // Show the modal after a short delay so the map loads visibly first
+    setTimeout(function() {
+        const modalEl = document.getElementById('welcomeModal');
+        if (!modalEl) return;
+        const modal = new bootstrap.Modal(modalEl, { backdrop: 'static' });
+        modal.show();
+    }, 600);
+
+    // When the modal is dismissed, check if the checkbox was ticked
+    document.getElementById('welcomeModal').addEventListener('hide.bs.modal', function() {
+        if (document.getElementById('dontShowAgain').checked) {
+            localStorage.setItem(STORAGE_KEY, 'true');
+        }
+    });
+
+})();
