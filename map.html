@@ -15,17 +15,18 @@
     
     <style>
         /* ── Glossary term links ── */
-        .glossary-link {
-            color: inherit;
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-decoration-color: #2C5F5D;
-            cursor: pointer;
-        }
-        .glossary-link:hover {
-            color: #2C5F5D;
-            text-decoration-style: solid;
-        }
+     a.glossary-link,
+a.glossary-link:visited {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1.5px dotted #2C5F5D;
+    cursor: pointer;
+}
+a.glossary-link:hover {
+    color: #2C5F5D;
+    border-bottom-style: solid;
+    text-decoration: none;
+}
  
         /* Craft Type Icon Legend Styles */
         .craft-legend-section {
