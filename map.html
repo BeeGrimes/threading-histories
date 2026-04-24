@@ -5,38 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Map - Threading Histories</title>
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Leaflet MarkerCluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/map.css">
     
     <style>
+        /* ── Glossary term links ── */
+        .glossary-link {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: #2C5F5D;
+            cursor: pointer;
+        }
+        .glossary-link:hover {
+            color: #2C5F5D;
+            text-decoration-style: solid;
+        }
+
         /* Craft Type Icon Legend Styles */
         .craft-legend-section {
             margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 2px solid #F4E9DC;
         }
-        
         .craft-legend-item {
             display: flex;
             align-items: center;
             margin-bottom: 0.6rem;
             font-size: 0.9rem;
         }
-        
         .craft-icon-wrapper {
             width: 32px;
             height: 32px;
@@ -46,28 +48,18 @@
             margin-right: 10px;
             flex-shrink: 0;
         }
-        
-        .craft-icon-wrapper svg {
-            width: 28px;
-            height: 28px;
-        }
-        
-        .craft-label {
-            color: #2D3142;
-            line-height: 1.2;
-        }
+        .craft-icon-wrapper svg { width: 28px; height: 28px; }
+        .craft-label { color: #2D3142; line-height: 1.2; }
     </style>
 </head>
 <script>
 function copyCitation() {
     const citation = "Grimes, Bryttany. (2026). Threading Histories: Nigerian Women's Textile Traditions Dataset (Version 1.0.0) [Data set]. CHI Fellowship, Michigan State University. https://threadinghistories.org";
-    
     navigator.clipboard.writeText(citation).then(function() {
         const btn = event.target.closest('.copy-citation');
         const originalHTML = btn.innerHTML;
         btn.innerHTML = '<i class="bi bi-check"></i> Copied!';
         btn.classList.add('text-success');
-        
         setTimeout(function() {
             btn.innerHTML = originalHTML;
             btn.classList.remove('text-success');
@@ -81,44 +73,30 @@ function copyCitation() {
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <h1 class="mb-0">Threading Histories</h1>
-        </a>
-        
+        <a class="navbar-brand" href="index.html"><h1 class="mb-0">Threading Histories</h1></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="map.html">Interactive Map</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="repository.html">Textile Repository</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="repository.html">Textile Repository</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Community
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Community</a>
                     <ul class="dropdown-menu" aria-labelledby="communityDropdown">
                         <li><a class="dropdown-item" href="spotlight.html">Community Spotlight</a></li>
                         <li><a class="dropdown-item" href="outreach.html">Community Outreach</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        About
-                    </a>
-              <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-    <li><a class="dropdown-item" href="methodology.html">Methodology</a></li>
-    <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
-    <li><a class="dropdown-item" href="essay.html">Interpretive Essay</a></li>
-    <li><a class="dropdown-item" href="glossary.html">Glossary</a></li>
-</ul>
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="methodology.html">Methodology</a></li>
+                        <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
+                        <li><a class="dropdown-item" href="essay.html">Interpretive Essay</a></li>
+                        <li><a class="dropdown-item" href="glossary.html">Glossary</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -193,7 +171,6 @@ function copyCitation() {
                     <div class="filter-section craft-legend-section">
                         <h5>Craft Type Icons</h5>
                         
-                        <!-- Weaving -->
                         <div class="craft-legend-item">
                             <div class="craft-icon-wrapper">
                                 <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -211,7 +188,6 @@ function copyCitation() {
                             <span class="craft-label">Weaving</span>
                         </div>
                         
-                        <!-- Dyeing -->
                         <div class="craft-legend-item">
                             <div class="craft-icon-wrapper">
                                 <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +198,6 @@ function copyCitation() {
                             <span class="craft-label">Dyeing</span>
                         </div>
                         
-                        <!-- Embroidery -->
                         <div class="craft-legend-item">
                             <div class="craft-icon-wrapper">
                                 <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -236,7 +211,6 @@ function copyCitation() {
                             <span class="craft-label">Embroidery</span>
                         </div>
                         
-                        <!-- Beadwork -->
                         <div class="craft-legend-item">
                             <div class="craft-icon-wrapper">
                                 <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -255,7 +229,6 @@ function copyCitation() {
                         </p>
                     </div>
 
-                    <!-- Reset Button -->
                     <button class="btn btn-custom mt-3 w-100" id="resetFilters">Reset All Filters</button>
                 </div>
             </div>
@@ -268,12 +241,10 @@ function copyCitation() {
         </div>
     </div>
 
-    <!-- Detail Sidebar (slides in from right when marker clicked) -->
+    <!-- Detail Sidebar -->
     <div class="detail-sidebar" id="detailSidebar">
         <button class="close-btn" id="closeSidebar" aria-label="Close detail panel">&times;</button>
-        <div class="detail-content" id="detailContent">
-            <!-- Content will be dynamically inserted by JavaScript -->
-        </div>
+        <div class="detail-content" id="detailContent"></div>
     </div>
 
     <!-- Data Download Section -->
@@ -287,12 +258,9 @@ function copyCitation() {
             </div>
 
             <div class="row g-4">
-                <!-- GeoJSON Download Card -->
                 <div class="col-md-4">
                     <div class="download-card">
-                        <div class="download-icon geojson">
-                            <i class="bi bi-globe"></i>
-                        </div>
+                        <div class="download-icon geojson"><i class="bi bi-globe"></i></div>
                         <h4>GeoJSON</h4>
                         <p class="text-muted">For GIS applications and web mapping</p>
                         <ul class="format-details">
@@ -307,12 +275,9 @@ function copyCitation() {
                     </div>
                 </div>
 
-                <!-- CSV Download Card -->
                 <div class="col-md-4">
                     <div class="download-card">
-                        <div class="download-icon csv">
-                            <i class="bi bi-file-spreadsheet"></i>
-                        </div>
+                        <div class="download-icon csv"><i class="bi bi-file-spreadsheet"></i></div>
                         <h4>CSV</h4>
                         <p class="text-muted">For spreadsheets and statistical analysis</p>
                         <ul class="format-details">
@@ -327,12 +292,9 @@ function copyCitation() {
                     </div>
                 </div>
 
-                <!-- JSON Download Card -->
                 <div class="col-md-4">
                     <div class="download-card">
-                        <div class="download-icon json">
-                            <i class="bi bi-code-square"></i>
-                        </div>
+                        <div class="download-icon json"><i class="bi bi-code-square"></i></div>
                         <h4>JSON</h4>
                         <p class="text-muted">For web applications and programming</p>
                         <ul class="format-details">
@@ -348,7 +310,6 @@ function copyCitation() {
                 </div>
             </div>
 
-            <!-- Metadata & Documentation Row -->
             <div class="row mt-4">
                 <div class="col-lg-8 mx-auto">
                     <div class="metadata-card">
@@ -370,7 +331,6 @@ function copyCitation() {
                 </div>
             </div>
 
-            <!-- Usage Information -->
             <div class="row mt-5">
                 <div class="col-lg-10 mx-auto">
                     <div class="usage-info">
@@ -378,9 +338,7 @@ function copyCitation() {
                         <p><strong>License:</strong> Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
                         <p><strong>Citation:</strong></p>
                         <div class="citation-box">
-                            <code>
-                                Grimes, Bryttany. (2026). Threading Histories: Nigerian Women's Textile Traditions Dataset (Version 1.0.0) [Data set]. CHI Fellowship, Michigan State University. https://threadinghistories.org
-                            </code>
+                            <code>Grimes, Bryttany. (2026). Threading Histories: Nigerian Women's Textile Traditions Dataset (Version 1.0.0) [Data set]. CHI Fellowship, Michigan State University. https://threadinghistories.org</code>
                             <button class="btn btn-sm btn-link copy-citation" onclick="copyCitation()">
                                 <i class="bi bi-clipboard"></i> Copy
                             </button>
@@ -396,7 +354,6 @@ function copyCitation() {
                 </div>
             </div>
 
-            <!-- Version Information -->
             <div class="row mt-4">
                 <div class="col-lg-10 mx-auto text-center">
                     <p class="text-muted small">
@@ -409,39 +366,27 @@ function copyCitation() {
         </div>
     </section>
 
-   <!-- Footer -->
-<footer style="background-color: #2D3142; color: white; padding: 2rem 0; margin-top: 4rem;">
-    <div class="container text-center">
-        <p>&copy; 2025-2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
-        <p>
-            <a href="#" class="text-white me-3">Privacy Policy</a>
-            <a href="#" class="text-white me-3">Terms of Use</a>
-            <a href="https://beegrimes.github.io/" target="_blank" rel="noopener noreferrer" class="text-white">Personal Website</a>
-        </p>
-    </div>
-</footer>
+    <footer style="background-color: #2D3142; color: white; padding: 2rem 0; margin-top: 4rem;">
+        <div class="container text-center">
+            <p>&copy; 2025-2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
+            <p>
+                <a href="#" class="text-white me-3">Privacy Policy</a>
+                <a href="#" class="text-white me-3">Terms of Use</a>
+                <a href="https://beegrimes.github.io/" target="_blank" rel="noopener noreferrer" class="text-white">Personal Website</a>
+            </p>
+        </div>
+    </footer>
 
-    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Leaflet MarkerCluster JavaScript -->
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-    
-    <!-- Custom Map JavaScript -->
     <script src="js/map.js"></script>
-    <!-- ============================================
-     WELCOME MODAL
-     Paste this directly before </body>
-     ============================================ -->
 
+<!-- WELCOME MODAL -->
 <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" style="border: none; border-radius: 12px; overflow: hidden;">
 
-            <!-- Modal Header -->
             <div class="modal-header" style="background: linear-gradient(135deg, #2C7873, #C96D5E); border: none; padding: 1.75rem 2rem;">
                 <div>
                     <h4 class="modal-title mb-1" id="welcomeModalLabel" style="color: white; font-family: Georgia, serif;">
@@ -454,10 +399,8 @@ function copyCitation() {
                 <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <!-- Modal Body -->
             <div class="modal-body" style="padding: 2rem; background-color: #FDFCF8;">
 
-                <!-- Project Introduction -->
                 <p style="color: #2D3142; line-height: 1.75;">
                     This interactive map documents how British colonialism disrupted traditional textile 
                     knowledge systems across Yoruba, Igbo, and Hausa communities in Nigeria. Each marker 
@@ -467,14 +410,12 @@ function copyCitation() {
 
                 <hr style="border-color: #F4E9DC; margin: 1.25rem 0;">
 
-                <!-- How to Use -->
                 <h6 style="color: #2C5F5D; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">
                     How to Use This Map
                 </h6>
 
                 <div class="row g-3">
 
-                    <!-- Step 1 -->
                     <div class="col-md-6">
                         <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #2C5F5D; height: 100%;">
                             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
@@ -490,7 +431,6 @@ function copyCitation() {
                         </div>
                     </div>
 
-                    <!-- Step 2 -->
                     <div class="col-md-6">
                         <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #2C5F5D; height: 100%;">
                             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
@@ -505,7 +445,6 @@ function copyCitation() {
                         </div>
                     </div>
 
-                    <!-- Step 3 -->
                     <div class="col-md-6">
                         <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #E76F51; height: 100%;">
                             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
@@ -520,7 +459,6 @@ function copyCitation() {
                         </div>
                     </div>
 
-                    <!-- Step 4 -->
                     <div class="col-md-6">
                         <div style="background: white; border-radius: 8px; padding: 1rem 1.1rem; border-left: 4px solid #E76F51; height: 100%;">
                             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
@@ -536,30 +474,30 @@ function copyCitation() {
                     </div>
 
                 </div>
+
+                <!-- Glossary note -->
+                <div style="margin-top: 1.25rem; padding: 0.75rem 1rem; background-color: #F4F1DE; border-radius: 6px; font-size: 0.87rem; color: #555;">
+                    <strong style="color: #2C5F5D;">&#128218; New to these traditions?</strong>
+                    Our <a href="glossary.html" style="color: #2C5F5D; font-weight: bold;">Glossary of Cultural Terms</a> defines key vocabulary from Yoruba, Igbo, and Hausa textile traditions — including <a href="glossary.html#term-adire" style="color:#2C5F5D;">adire</a>, <a href="glossary.html#term-aso-oke" style="color:#2C5F5D;">aso oke</a>, <a href="glossary.html#term-akwete" style="color:#2C5F5D;">Akwete cloth</a>, and more.
+                </div>
+
             </div>
 
-            <!-- Modal Footer -->
             <div class="modal-footer" style="background-color: #F4F1DE; border-top: 1px solid #e8e0d0; padding: 1rem 2rem; justify-content: space-between; align-items: center;">
-
-                <!-- Don't show again checkbox -->
                 <div class="form-check mb-0">
-                    <input class="form-check-input" type="checkbox" id="dontShowAgain"
-                           style="border-color: #2C5F5D; cursor: pointer;">
-                    <label class="form-check-label" for="dontShowAgain"
-                           style="color: #666; font-size: 0.88rem; cursor: pointer;">
+                    <input class="form-check-input" type="checkbox" id="dontShowAgain" style="border-color: #2C5F5D; cursor: pointer;">
+                    <label class="form-check-label" for="dontShowAgain" style="color: #666; font-size: 0.88rem; cursor: pointer;">
                         Don't show this again
                     </label>
                 </div>
-
-                <!-- Explore button -->
                 <button type="button" class="btn" data-bs-dismiss="modal"
                         style="background-color: #2C5F5D; color: white; padding: 0.5rem 1.5rem; border-radius: 6px; font-weight: 500;">
                     Explore the Map
                 </button>
-
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>
