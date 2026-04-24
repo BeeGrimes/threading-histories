@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Methodology - Threading Histories</title>
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
     <style>
+        /* ── Glossary term links ── */
+        .glossary-link {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: #2C5F5D;
+            cursor: pointer;
+        }
+        .glossary-link:hover {
+            color: #2C5F5D;
+            text-decoration-style: solid;
+        }
+
         .methodology-header {
             background: linear-gradient(135deg, #2C7873, #C96D5E);
             color: white;
             padding: 4rem 0;
             margin-bottom: 3rem;
         }
-
-        .methodology-header .lead {
-            color: rgba(255,255,255,0.9);
-        }
+        .methodology-header .lead { color: rgba(255,255,255,0.9); }
 
         .method-section {
             background: white;
@@ -34,7 +39,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.07);
             border-left: 5px solid #2C5F5D;
         }
-
         .method-section h2 {
             color: #2C5F5D;
             font-size: 1.6rem;
@@ -43,12 +47,7 @@
             align-items: center;
             gap: 0.65rem;
         }
-
-        .method-section h2 i {
-            color: #E76F51;
-            font-size: 1.4rem;
-        }
-
+        .method-section h2 i { color: #E76F51; font-size: 1.4rem; }
         .method-section h5 {
             color: #2C5F5D;
             margin-top: 1.5rem;
@@ -57,30 +56,12 @@
             align-items: center;
             gap: 0.5rem;
         }
+        .method-section h5 i { color: #E76F51; }
+        .method-section p, .method-section ul { color: #2D3142; line-height: 1.75; }
+        .method-section ul { padding-left: 1.5rem; }
+        .method-section ul li { margin-bottom: 0.35rem; }
 
-        .method-section h5 i {
-            color: #E76F51;
-        }
-
-        .method-section p,
-        .method-section ul {
-            color: #2D3142;
-            line-height: 1.75;
-        }
-
-        .method-section ul {
-            padding-left: 1.5rem;
-        }
-
-        .method-section ul li {
-            margin-bottom: 0.35rem;
-        }
-
-        .research-questions {
-            list-style: none;
-            padding-left: 0;
-        }
-
+        .research-questions { list-style: none; padding-left: 0; }
         .research-questions li {
             padding: 0.65rem 1rem;
             margin-bottom: 0.5rem;
@@ -89,6 +70,17 @@
             border-radius: 0 4px 4px 0;
             line-height: 1.6;
         }
+
+        .glossary-note {
+            background-color: #F4F1DE;
+            border-left: 4px solid #2C5F5D;
+            border-radius: 0 8px 8px 0;
+            padding: 0.85rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.92rem;
+            color: #2D3142;
+        }
+        .glossary-note a { color: #2C5F5D; font-weight: bold; }
 
         .alert-info {
             background-color: #e8f4f8;
@@ -101,49 +93,36 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <h1 class="mb-0">Threading Histories</h1>
-        </a>
+        <a class="navbar-brand" href="index.html"><h1 class="mb-0">Threading Histories</h1></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="map.html">Interactive Map</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="repository.html">Textile Repository</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="repository.html">Textile Repository</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Community
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Community</a>
                     <ul class="dropdown-menu" aria-labelledby="communityDropdown">
                         <li><a class="dropdown-item" href="spotlight.html">Community Spotlight</a></li>
                         <li><a class="dropdown-item" href="outreach.html">Community Outreach</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        About
-                    </a>
-                  <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-    <li><a class="dropdown-item" href="methodology.html">Methodology</a></li>
-    <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
-    <li><a class="dropdown-item" href="essay.html">Interpretive Essay</a></li>
-    <li><a class="dropdown-item" href="glossary.html">Glossary</a></li>
-</ul>
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item active" href="methodology.html">Methodology</a></li>
+                        <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
+                        <li><a class="dropdown-item" href="essay.html">Interpretive Essay</a></li>
+                        <li><a class="dropdown-item" href="glossary.html">Glossary</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Page Header -->
 <div class="methodology-header text-center py-5">
     <div class="container">
         <h1 class="mb-3" style="color: white;">Project Methodology</h1>
@@ -152,6 +131,11 @@
 </div>
 
 <main class="container my-5" style="max-width: 860px;">
+
+    <!-- Glossary note -->
+    <div class="glossary-note">
+        <i class="fas fa-book me-2"></i>Cultural and textile terms used throughout this page are defined in the <a href="glossary.html">Glossary</a>. Terms with a <span style="border-bottom: 1px dotted #2C5F5D;">dotted underline</span> link directly to their definition.
+    </div>
 
     <!-- Section 1: Research Questions -->
     <div class="method-section">
@@ -203,13 +187,13 @@
         <p>My methodology combines spatial humanities, feminist historiography, and postcolonial analysis:</p>
 
         <h5><i class="fas fa-globe-africa"></i>Geospatial Mapping</h5>
-        <p>I use Leaflet.js and GeoJSON to map textile traditions across geographic regions, connecting material culture to specific communities and ethnolinguistic groups. Historical maps are georeferenced using QGIS to provide geographic context.</p>
+        <p>I use Leaflet.js and GeoJSON to map textile traditions across geographic regions, connecting material culture to specific communities and ethnolinguistic groups. Historical maps are georeferenced using QGIS to provide geographic context. Craft types documented include <a href="glossary.html#term-resist-dyeing" class="glossary-link">resist dyeing</a>, <a href="glossary.html#term-strip-weaving" class="glossary-link">strip weaving</a>, embroidery, and beadwork.</p>
 
         <h5><i class="fas fa-clock"></i>Temporal Analysis</h5>
-        <p>The project documents change across time periods (1850–1885, 1885–1920, 1920–1960), showing how colonial policies transformed production patterns over time rather than presenting colonialism as a singular disruptive event. Time periods are recorded in the data and displayed contextually rather than used to filter markers — a deliberate methodological decision to avoid imposing rigid chronological boundaries on traditions that are continuous and fluid by nature.</p>
+        <p>The project documents change across time periods (1850–1885, 1885–1920, 1920–1960), showing how colonial policies transformed production patterns over time rather than presenting colonialism as a singular disruptive event. A key mechanism of disruption was the introduction of <a href="glossary.html#term-guinea-cloth" class="glossary-link">guinea cloth</a> — factory-manufactured British imitations of locally woven fabrics sold below production cost — alongside the replacement of locally grown <a href="glossary.html#term-indigo" class="glossary-link">indigo</a> with imported synthetic dyes from the 1890s onward. Time periods are recorded in the data and displayed contextually rather than used to filter markers — a deliberate methodological decision to avoid imposing rigid chronological boundaries on traditions that are continuous and fluid by nature.</p>
 
         <h5><i class="fas fa-female"></i>Centering Women's Labor</h5>
-        <p>I foreground women's expertise, economic contributions, and knowledge systems that colonial archives often marginalized. Each location entry documents both the craft tradition and its practitioners, drawing on feminist scholarship including Amadiume's <em>Male Daughters, Female Husbands</em> (1987), Byfield's <em>The Bluest Hands</em> (2002), and Kriger's work on gender and textile production in the Sokoto Caliphate (1993).</p>
+        <p>I foreground women's expertise, economic contributions, and knowledge systems that colonial archives often marginalized. Each location entry documents both the craft tradition and its practitioners. Key traditions centered in this project include Yoruba <a href="glossary.html#term-adire" class="glossary-link">adire</a> dyeing and <a href="glossary.html#term-aso-oke" class="glossary-link">aso oke</a> weaving, Igbo <a href="glossary.html#term-akwete" class="glossary-link">Akwete cloth</a>, and Hausa embroidered <a href="glossary.html#term-babban-riga" class="glossary-link">babban riga</a> robes and <a href="glossary.html#term-indigo" class="glossary-link">indigo</a>-dyeing in the <a href="glossary.html#term-rimi" class="glossary-link">rimi</a> pits of Kano. This work draws on feminist scholarship including Amadiume's <em>Male Daughters, Female Husbands</em> (1987), Byfield's <em>The Bluest Hands</em> (2002), and Kriger's work on gender and textile production in the Sokoto Caliphate (1993).</p>
     </div>
 
     <!-- Section 4: Limitations -->
@@ -245,7 +229,6 @@
 
 </main>
 
-<!-- Footer -->
 <footer style="background-color: #2D3142; color: white; padding: 2rem 0; margin-top: 4rem;">
     <div class="container text-center">
         <p>&copy; 2025-2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
@@ -257,7 +240,6 @@
     </div>
 </footer>
 
-<!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
