@@ -53,6 +53,54 @@ const craftIcons = {
 };
 
 // ============================================
+// GLOSSARY LINK HELPER
+// Replaces the first occurrence of each known
+// cultural term in a string with a dotted link
+// back to its glossary entry.
+// ============================================
+
+function linkGlossaryTerms(text) {
+    if (!text) return text;
+
+    // Order matters — longer/more specific terms must come first
+    // so "adire eleko" is linked before the plain "adire" match runs.
+    const terms = [
+        ['adire eleko',   'term-adire-eleko'],
+        ['adire oniko',   'term-adire-oniko'],
+        ['adire',         'term-adire'],
+        ['aso oke',       'term-aso-oke'],
+        ['aso ebi',       'term-aso-ebi'],
+        ['akwete cloth',  'term-akwete'],
+        ['akwete',        'term-akwete'],
+        ['babban riga',   'term-babban-riga'],
+        ['guinea cloth',  'term-guinea-cloth'],
+        ['resist dyeing', 'term-resist-dyeing'],
+        ['strip weaving', 'term-strip-weaving'],
+        ['kano cloth',    'term-kano-cloth'],
+        ['indigo',        'term-indigo'],
+        ['rimi',          'term-rimi'],
+        ['gwado',         'term-gwado'],
+        ['sanyan',        'term-sanyan'],
+        ['alaari',        'term-alaari'],
+        ['etu',           'term-etu'],
+        ['zane',          'term-zane'],
+        ['uli',           'term-uli'],
+    ];
+
+    let result = text;
+    terms.forEach(([term, anchor]) => {
+        // Match whole word/phrase, case-insensitive, first occurrence only
+        const regex = new RegExp(`\\b(${term})\\b`, 'i');
+        result = result.replace(
+            regex,
+            `<a href="glossary.html#${anchor}" class="glossary-link">$1</a>`
+        );
+    });
+
+    return result;
+}
+
+// ============================================
 // MAP INITIALIZATION
 // ============================================
 
@@ -163,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-     marker.bindPopup(popupContent, {
+        marker.bindPopup(popupContent, {
             maxWidth: 300,
             className: 'custom-popup',
             autoPan: true,
@@ -180,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         marker.properties = props;
         return marker;
     }
-    
+
 
     // ============================================
     // LOAD GEOJSON DATA
@@ -291,6 +339,12 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         ` : '';
 
+        // Apply glossary links to the text fields pulled from GeoJSON
+        const description      = linkGlossaryTerms(props.description);
+        const historicalContext = linkGlossaryTerms(props.historical_context);
+        const colonialImpact   = linkGlossaryTerms(props.colonial_impact);
+        const sourceCitation   = props.source_citation; // sources don't need glossary links
+
         const detailHTML = `
             <h3>${props.location_name}</h3>
 
@@ -317,22 +371,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p><strong>Technique:</strong> ${props.specific_technique}</p>
                 <p><strong>Ethnic Group:</strong> ${props.ethnolinguistic_group}</p>
                 <p><strong>Time Period:</strong> ${props.time_period_start}-${props.time_period_end}</p>
-                <p>${props.description}</p>
+                <p>${description}</p>
             </div>
 
             <div id="context" class="tab-content">
                 <h5>Historical Context</h5>
-                <p>${props.historical_context}</p>
+                <p>${historicalContext}</p>
             </div>
 
             <div id="impact" class="tab-content">
                 <h5>Colonial Impact</h5>
-                <p>${props.colonial_impact}</p>
+                <p>${colonialImpact}</p>
             </div>
 
             <div id="sources" class="tab-content">
                 <h5>Sources</h5>
-                <p>${props.source_citation}</p>
+                <p>${sourceCitation}</p>
             </div>
         `;
 
@@ -409,13 +463,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const props = item.properties;
             let show = true;
 
-            if (!selectedCrafts.includes(props.craft_type)) {
-                show = false;
-            }
-
-            if (!selectedEthnic.includes(props.ethnolinguistic_group)) {
-                show = false;
-            }
+            if (!selectedCrafts.includes(props.craft_type)) show = false;
+            if (!selectedEthnic.includes(props.ethnolinguistic_group)) show = false;
 
             if (show) {
                 markerClusterGroup.addLayer(item.marker);
@@ -447,6 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✓ Map initialization complete');
 
 }); // End DOMContentLoaded
+
 // ============================================
 // WELCOME MODAL
 // Shows on first visit. Respects "Don't show
@@ -456,10 +506,8 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     const STORAGE_KEY = 'threadingHistories_hideWelcome';
 
-    // If user previously checked "Don't show again", skip the modal
     if (localStorage.getItem(STORAGE_KEY) === 'true') return;
 
-    // Show the modal after a short delay so the map loads visibly first
     setTimeout(function() {
         const modalEl = document.getElementById('welcomeModal');
         if (!modalEl) return;
@@ -467,7 +515,6 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.show();
     }, 600);
 
-    // When the modal is dismissed, check if the checkbox was ticked
     document.getElementById('welcomeModal').addEventListener('hide.bs.modal', function() {
         if (document.getElementById('dontShowAgain').checked) {
             localStorage.setItem(STORAGE_KEY, 'true');
