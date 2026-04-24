@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossary - Threading Histories</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-teal: #2C5F5D;
+            --secondary-terracotta: #C96D5E;
+            --accent-cream: #F4E9DC;
+            --text-dark: #2D3142;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            background-color: var(--accent-cream);
+            background-image: url('images/background/burlap-texture.jpg');
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(244, 241, 222, 0.7);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ── Navigation ── */
+        .navbar-brand h1 { font-size: 1.5rem; margin: 0; }
+        .navbar-brand, .nav-link { color: white !important; }
+        .nav-link:hover { color: var(--accent-cream) !important; }
+
+        @media (min-width: 992px) {
+            .navbar .dropdown:hover .dropdown-menu { display: block; margin-top: 0; }
+        }
+        .navbar .dropdown-menu {
+            background-color: #F4E9DC;
+            border: 1px solid #2C5F5D;
+            border-radius: 0.25rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .navbar .dropdown-item { color: #2D3142; padding: 0.5rem 1rem; font-size: 0.95rem; transition: background-color 0.3s ease, color 0.3s ease; }
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus,
+        .navbar .dropdown-item.active { background-color: #2C5F5D; color: white; }
+
+        /* ── Page Header ── */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-terracotta));
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+        .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+
+        /* ── Search & Filter Bar ── */
+        .filter-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .filter-bar input {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+        }
+        .filter-bar input:focus {
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 0.2rem rgba(44,95,93,0.2);
+        }
+        .filter-btn {
+            border: 2px solid var(--primary-teal);
+            color: var(--primary-teal);
+            background: white;
+            border-radius: 20px;
+            padding: 0.35rem 1.1rem;
+            font-size: 0.9rem;
+            font-family: 'Georgia', serif;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-teal);
+            color: white;
+        }
+        .filter-btn.terracotta { border-color: var(--secondary-terracotta); color: var(--secondary-terracotta); }
+        .filter-btn.terracotta:hover,
+        .filter-btn.terracotta.active { background: var(--secondary-terracotta); color: white; }
+
+        /* ── Alphabet Nav ── */
+        .alpha-nav {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+        .alpha-nav a {
+            color: var(--primary-teal);
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-decoration: none;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .alpha-nav a:hover { background: var(--accent-cream); }
+        .alpha-nav a.disabled { color: #ccc; pointer-events: none; }
+
+        /* ── Glossary Section ── */
+        .glossary-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .letter-heading {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-teal);
+            border-bottom: 3px solid var(--secondary-terracotta);
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── Individual Term ── */
+        .glossary-term {
+            padding: 1.1rem 0;
+            border-bottom: 1px solid #f0ebe3;
+            transition: background 0.15s;
+        }
+        .glossary-term:last-child { border-bottom: none; }
+        .glossary-term.hidden { display: none; }
+
+        .term-header { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+        .term-name {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+        .term-pronunciation {
+            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .term-group-badge {
+            font-size: 0.78rem;
+            padding: 0.2rem 0.65rem;
+            border-radius: 20px;
+            font-weight: normal;
+            font-family: 'Georgia', serif;
+        }
+        .badge-yoruba  { background-color: #2C5F5D; color: white; }
+        .badge-igbo    { background-color: #C96D5E; color: white; }
+        .badge-hausa   { background-color: #6B4F3A; color: white; }
+        .badge-general { background-color: #6c757d; color: white; }
+
+        .term-definition { color: var(--text-dark); line-height: 1.65; margin-bottom: 0.5rem; }
+        .term-context {
+            font-size: 0.88rem;
+            color: #6c757d;
+            font-style: italic;
+        }
+        .term-context a { color: var(--primary-teal); text-decoration: underline; }
+
+        /* ── No Results ── */
+        #noResults {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 12px;
+            color: #6c757d;
+        }
+        #noResults i { font-size: 3rem; margin-bottom: 1rem; color: var(--secondary-terracotta); }
+
+        /* ── How to Use Panel ── */
+        .how-to-use {
+            background: white;
+            border-radius: 12px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary-teal);
+        }
+        .how-to-use h5 { color: var(--primary-teal); margin-bottom: 0.75rem; }
+
+        /* ── Footer ── */
+        footer { background-color: var(--text-dark); color: white; padding: 2rem 0; margin-top: 4rem; }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2C5F5D;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><h1 class="mb-0">Threading Histories</h1></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="map.html">Interactive Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="repository.html">Textile Repository</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Community</a>
+                    <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                        <li><a class="dropdown-item" href="spotlight.html">Community Spotlight</a></li>
+                        <li><a class="dropdown-item" href="outreach.html">Community Outreach</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="methodology.html">Methodology</a></li>
+                        <li><a class="dropdown-item" href="bibliography.html">Bibliography</a></li>
+                        <li><a class="dropdown-item" href="essay.html">Interpretive Essay</a></li>
+                        <li><a class="dropdown-item active" href="glossary.html">Glossary</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container text-center">
+        <h1><i class="bi bi-book"></i> Glossary of Cultural Terms</h1>
+        <p class="lead">Key vocabulary from Yoruba, Igbo, and Hausa textile traditions</p>
+        <p>Terms spanning craft techniques, materials, garments, and cultural practices documented across the 1850–1960 period</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- How to Use -->
+    <div class="how-to-use">
+        <h5><i class="bi bi-info-circle me-2"></i>How to Use This Glossary</h5>
+        <p class="mb-0">Use the search box to find a specific term, or filter by ethnolinguistic group using the buttons below. Terms marked with a map icon
+            <i class="bi bi-geo-alt-fill text-success"></i> link directly to their location on the interactive map.
+            Terms are transliterated from Yoruba, Igbo, and Hausa; pronunciations are given where known.
+        </p>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div class="filter-bar">
+        <div class="row align-items-center g-3">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" id="glossarySearch" class="form-control border-start-0"
+                        placeholder="Search terms…" aria-label="Search glossary">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                    <span class="text-muted small me-1">Filter by group:</span>
+                    <button class="filter-btn active" data-filter="all">All Terms</button>
+                    <button class="filter-btn" data-filter="yoruba">Yoruba</button>
+                    <button class="filter-btn terracotta" data-filter="igbo">Igbo</button>
+                    <button class="filter-btn" style="border-color:#6B4F3A;color:#6B4F3A;" data-filter="hausa"
+                        onmouseover="this.style.background='#6B4F3A';this.style.color='white';"
+                        onmouseout="if(!this.classList.contains('active')){this.style.background='white';this.style.color='#6B4F3A';}">Hausa</button>
+                    <button class="filter-btn" style="border-color:#6c757d;color:#6c757d;" data-filter="general"
+                        onmouseover="this.style.background='#6c757d';this.style.color='white';"
+                        onmouseout="if(!this.classList.contains('active')){this.style.background='white';this.style.color='#6c757d';}">General / Cross-Cultural</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alphabet Quick Nav -->
+    <div class="alpha-nav" id="alphaNav">
+        <!-- Populated by JS -->
+    </div>
+
+    <!-- No Results State -->
+    <div id="noResults">
+        <i class="bi bi-search d-block"></i>
+        <h5>No terms found</h5>
+        <p>Try a different search term or clear your filter.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         GLOSSARY TERMS
+         Each .glossary-term needs:
+           data-group="yoruba|igbo|hausa|general"
+           data-letter="A" (first letter of term, uppercase)
+         ═══════════════════════════════════════════ -->
+
+    <!-- A -->
+    <div class="glossary-section" id="letter-A">
+        <div class="letter-heading">A</div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="A">
+            <div class="term-header">
+                <span class="term-name">Adire</span>
+                <span class="term-pronunciation">ah-DEE-ray</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">A resist-dyed indigo cloth produced primarily by Yoruba women, particularly in Abeokuta and Ibadan. The word translates literally as "to tie and dye." Two primary methods were used: <em>adire eleko</em> (starch-resist) and <em>adire oniko</em> (tie-dye). Adire production was a significant source of female economic autonomy in southwestern Nigeria.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH001">Abeokuta (TH001)</a>, <a href="map.html#TH002">Lagos (TH002)</a>, <a href="map.html#TH003">Ibadan (TH003)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="A">
+            <div class="term-header">
+                <span class="term-name">Adire Eleko</span>
+                <span class="term-pronunciation">ah-DEE-ray eh-LEH-koh</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">A form of <em>adire</em> in which cassava starch paste (<em>eko</em>) is applied to cloth using a feather, comb, or tin stencil to resist indigo dye. The technique allows for intricate geometric and figurative patterns. It became particularly associated with Abeokuta women weavers and was among the forms most affected by the introduction of imported synthetic indigo in the colonial period.</p>
+            <p class="term-context">See also: <a href="#adire">Adire</a>, <a href="#adire-oniko">Adire Oniko</a></p>
+        </div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="A" id="adire-oniko">
+            <div class="term-header">
+                <span class="term-name">Adire Oniko</span>
+                <span class="term-pronunciation">ah-DEE-ray oh-NEE-koh</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">A tie-dye form of <em>adire</em> in which portions of cloth are bound tightly with raffia before immersion in indigo dye vats. The bound sections resist the dye, producing characteristic circular and linear patterns. One of the oldest resist-dyeing techniques practiced by Yoruba women.</p>
+            <p class="term-context">See also: <a href="#adire">Adire</a></p>
+        </div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="A">
+            <div class="term-header">
+                <span class="term-name">Alaari</span>
+                <span class="term-pronunciation">ah-LAH-ah-ree</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">A prestigious crimson or deep-red silk cloth woven on narrow horizontal looms in Oyo and Iseyin. The cloth was associated with royalty and high-status ceremonial occasions. Its production required imported silk thread, making it vulnerable to colonial-era trade disruptions.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH004">Iseyin (TH004)</a>, <a href="map.html#TH005">Oyo (TH005)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="A">
+            <div class="term-header">
+                <span class="term-name">Aso Ebi</span>
+                <span class="term-pronunciation">ah-SHOW eh-BEE</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">Literally "family cloth," a Yoruba practice in which members of a social group — family, friends, or community — wear matching or coordinated fabric at ceremonies and celebrations. Aso ebi functions as a visible marker of solidarity and belonging, and historically served as a mechanism for communal textile patronage that supported women weavers.</p>
+            <p class="term-context">Related concept: <a href="#aso-oke">Aso Oke</a></p>
+        </div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="A" id="aso-oke">
+            <div class="term-header">
+                <span class="term-name">Aso Oke</span>
+                <span class="term-pronunciation">ah-SHOW oh-KEH</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">Hand-loomed Yoruba prestige cloth woven in narrow strips on a horizontal treadle loom and sewn together. Produced primarily in Iseyin and Oyo, aso oke encompasses three varieties distinguished by weave structure and material: <em>alaari</em> (red), <em>sanyan</em> (brown), and <em>etu</em> (dark blue). It remains central to Yoruba ceremonial dress.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH004">Iseyin (TH004)</a>, <a href="map.html#TH005">Oyo (TH005)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+
+        <div class="glossary-term" data-group="igbo" data-letter="A">
+            <div class="term-header">
+                <span class="term-name">Akwete Cloth</span>
+                <span class="term-pronunciation">ah-KWEH-teh</span>
+                <span class="term-group-badge badge-igbo">Igbo</span>
+            </div>
+            <p class="term-definition">A distinctive hand-woven cloth produced exclusively by women in Akwete, a town in present-day Abia State. Woven on an upright loom using a continuous weft technique, Akwete cloth is known for its dense, complex patterns incorporating figurative motifs, geometric designs, and lattice structures. It was historically an important prestige cloth traded across the Niger Delta and beyond.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH006">Akwete (TH006)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- B -->
+    <div class="glossary-section" id="letter-B">
+        <div class="letter-heading">B</div>
+
+        <div class="glossary-term" data-group="hausa" data-letter="B">
+            <div class="term-header">
+                <span class="term-name">Babban Riga</span>
+                <span class="term-pronunciation">BAH-ban REE-gah</span>
+                <span class="term-group-badge badge-hausa">Hausa</span>
+            </div>
+            <p class="term-definition">A large, voluminous embroidered robe considered the most prestigious item of Hausa male dress, though women were central to its production through spinning, weaving, and embroidery. The garment's elaborate embroidery — particularly around the neckline and pocket — was executed by male embroiderers (<em>yan dinkawa</em>) working in Kano and Zaria, but the cloth itself was prepared by women spinners and weavers.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH009">Kano (TH009)</a>, <a href="map.html#TH010">Zaria (TH010)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- E -->
+    <div class="glossary-section" id="letter-E">
+        <div class="letter-heading">E</div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="E">
+            <div class="term-header">
+                <span class="term-name">Etu</span>
+                <span class="term-pronunciation">EH-too</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">One of the three prestige varieties of <em>aso oke</em>, distinguished by its deep indigo-blue color achieved through repeated immersion in indigo dye vats. The name derives from the Yoruba word for guinea fowl, referencing the cloth's characteristic dark blue with subtle patterning. Etu was associated with senior members of Yoruba society and was used in funerary and masquerade contexts.</p>
+            <p class="term-context">See also: <a href="#aso-oke">Aso Oke</a></p>
+        </div>
+    </div>
+
+    <!-- G -->
+    <div class="glossary-section" id="letter-G">
+        <div class="letter-heading">G</div>
+
+        <div class="glossary-term" data-group="general" data-letter="G">
+            <div class="term-header">
+                <span class="term-name">Guinea Cloth / Guinea Brocade</span>
+                <span class="term-group-badge badge-general">General / Cross-Cultural</span>
+            </div>
+            <p class="term-definition">A category of imported European-manufactured cloth designed specifically for the West African market. Guinea cloth was produced in Manchester and other British textile centers to imitate the colors and patterns of locally woven fabrics, then sold at prices that undercut indigenous producers. Its introduction in the late nineteenth century is one of the most documented mechanisms of colonial disruption of Nigerian women's textile industries.</p>
+            <p class="term-context">A key term in understanding colonial economic disruption across all ten project locations. See: <a href="methodology.html">Methodology</a></p>
+        </div>
+
+        <div class="glossary-term" data-group="hausa" data-letter="G">
+            <div class="term-header">
+                <span class="term-name">Gwado</span>
+                <span class="term-pronunciation">GWAH-doh</span>
+                <span class="term-group-badge badge-hausa">Hausa</span>
+            </div>
+            <p class="term-definition">A plain, narrow-strip woven cloth produced on a horizontal treadle loom in Hausa communities. Gwado was an everyday utilitarian cloth, as opposed to the prestige fabrics produced for elite markets. Women's labor in spinning the cotton thread used in gwado production was essential but frequently unacknowledged in colonial trade records.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH009">Kano (TH009)</a>, <a href="map.html#TH010">Zaria (TH010)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- I -->
+    <div class="glossary-section" id="letter-I">
+        <div class="letter-heading">I</div>
+
+        <div class="glossary-term" data-group="general" data-letter="I">
+            <div class="term-header">
+                <span class="term-name">Indigo</span>
+                <span class="term-group-badge badge-general">General / Cross-Cultural</span>
+            </div>
+            <p class="term-definition">A deep blue dye derived from the plant <em>Indigofera tinctoria</em> and related species, cultivated and processed by women across southwestern and northern Nigeria. Indigo dyeing was a central female economic activity, particularly among Yoruba women in Abeokuta and Ibadan. The shift from locally grown and processed indigo to imported synthetic indigo (introduced in the 1890s) significantly disrupted women's control over the dyeing trade.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH001">Abeokuta (TH001)</a>, <a href="map.html#TH003">Ibadan (TH003)</a>, <a href="map.html#TH009">Kano (TH009)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- K -->
+    <div class="glossary-section" id="letter-K">
+        <div class="letter-heading">K</div>
+
+        <div class="glossary-term" data-group="hausa" data-letter="K">
+            <div class="term-header">
+                <span class="term-name">Kano Cloth</span>
+                <span class="term-group-badge badge-hausa">Hausa</span>
+            </div>
+            <p class="term-definition">A collective term used in colonial trade records for the high-quality dyed and woven textiles produced in and exported from Kano, a major center of the trans-Saharan and regional cloth trade since at least the fifteenth century. Kano cloth encompassed a range of fabrics including strip-woven cotton, embroidered robes, and indigo-dyed wrappers. The city's dye pits (<em>rimi</em>) were among the most celebrated in West Africa.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH009">Kano (TH009)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- N -->
+    <div class="glossary-section" id="letter-N">
+        <div class="letter-heading">N</div>
+
+        <div class="glossary-term" data-group="igbo" data-letter="N">
+            <div class="term-header">
+                <span class="term-name">Nsukka Weaving</span>
+                <span class="term-group-badge badge-igbo">Igbo</span>
+            </div>
+            <p class="term-definition">A tradition of women's strip weaving practiced in the Nsukka region of Enugu State, distinct in technique and pattern vocabulary from Akwete cloth. Nsukka weavers used a narrow horizontal loom and produced cloth primarily for local ritual and ceremonial use, including funeral coverings and masquerade costumes. Colonial-era disruption of local cotton supply chains significantly reduced production by the 1930s.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH008">Nsukka (TH008)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- R -->
+    <div class="glossary-section" id="letter-R">
+        <div class="letter-heading">R</div>
+
+        <div class="glossary-term" data-group="general" data-letter="R">
+            <div class="term-header">
+                <span class="term-name">Resist Dyeing</span>
+                <span class="term-group-badge badge-general">General / Cross-Cultural</span>
+            </div>
+            <p class="term-definition">A textile dyeing technique in which portions of cloth are protected from dye penetration through physical binding (tie-dye), stitching (<em>tritik</em>), or the application of a resist substance such as starch paste, wax, or clay. Resist dyeing was practiced across all three ethnolinguistic groups documented in this project, with each tradition developing distinctive patterns, resist substances, and dyeing sequences. It represents one of the most significant areas of women's technical expertise in Nigerian textile history.</p>
+            <p class="term-context">See also: <a href="#adire">Adire</a>, <a href="#adire-oniko">Adire Oniko</a></p>
+        </div>
+
+        <div class="glossary-term" data-group="hausa" data-letter="R">
+            <div class="term-header">
+                <span class="term-name">Rimi (Dye Pits)</span>
+                <span class="term-pronunciation">REE-mee</span>
+                <span class="term-group-badge badge-hausa">Hausa</span>
+            </div>
+            <p class="term-definition">The famous sunken indigo dye pits of Kano, some of which have been in continuous use for over five centuries. The pits contain fermented indigo vats; cloth is repeatedly dipped and oxidized to achieve the characteristic deep blue associated with Kano textiles. Ownership of dye pits was historically structured around family lineages, and women's labor in preparing and maintaining the indigo fermentation process was central to production.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH009">Kano (TH009)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- S -->
+    <div class="glossary-section" id="letter-S">
+        <div class="letter-heading">S</div>
+
+        <div class="glossary-term" data-group="yoruba" data-letter="S">
+            <div class="term-header">
+                <span class="term-name">Sanyan</span>
+                <span class="term-pronunciation">SAHN-yahn</span>
+                <span class="term-group-badge badge-yoruba">Yoruba</span>
+            </div>
+            <p class="term-definition">One of the three prestige varieties of <em>aso oke</em>, distinguished by its beige or brown color produced from the thread of the <em>Anaphe</em> wild silk moth. Sanyan is the oldest of the three aso oke types and was traditionally produced in Oyo and Iseyin. Because it depends on a locally sourced material that cannot be easily substituted, sanyan production proved more resilient to colonial trade disruption than alaari.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH004">Iseyin (TH004)</a>, <a href="map.html#TH005">Oyo (TH005)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+
+        <div class="glossary-term" data-group="general" data-letter="S">
+            <div class="term-header">
+                <span class="term-name">Strip Weaving</span>
+                <span class="term-group-badge badge-general">General / Cross-Cultural</span>
+            </div>
+            <p class="term-definition">A technique in which cloth is woven in narrow strips — typically between four and twelve centimeters wide — on a horizontal treadle loom, then cut and sewn selvedge-to-selvedge to produce a wider textile. Strip weaving was practiced by both men and women across Nigeria, though who controlled production varied significantly by community. The resulting seam pattern is a characteristic visual feature of many West African prestige textiles.</p>
+            <p class="term-context">See also: <a href="#aso-oke">Aso Oke</a>, <a href="#gwado">Gwado</a></p>
+        </div>
+    </div>
+
+    <!-- U -->
+    <div class="glossary-section" id="letter-U">
+        <div class="letter-heading">U</div>
+
+        <div class="glossary-term" data-group="igbo" data-letter="U">
+            <div class="term-header">
+                <span class="term-name">Uli</span>
+                <span class="term-pronunciation">OO-lee</span>
+                <span class="term-group-badge badge-igbo">Igbo</span>
+            </div>
+            <p class="term-definition">A Igbo tradition of body and wall painting using a plant-derived juice from the <em>Lasimorpha senegalensis</em> plant that temporarily stains the skin dark blue-black. While not strictly a textile tradition, uli pattern-making is closely related to Igbo cloth design vocabularies, and many motifs appear across both media. Uli was primarily the domain of women and was applied for ceremonies, rites of passage, and aesthetic expression.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH007">Asaba (TH007)</a>, <a href="map.html#TH008">Nsukka (TH008)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- Z -->
+    <div class="glossary-section" id="letter-Z">
+        <div class="letter-heading">Z</div>
+
+        <div class="glossary-term" data-group="hausa" data-letter="Z">
+            <div class="term-header">
+                <span class="term-name">Zane</span>
+                <span class="term-pronunciation">ZAH-neh</span>
+                <span class="term-group-badge badge-hausa">Hausa</span>
+            </div>
+            <p class="term-definition">A large rectangular wrapper cloth worn by Hausa women, typically wrapped around the body and secured at the waist. Zane could be made from locally woven cotton, imported printed cotton, or silk depending on the wearer's status. The shift from locally woven to imported printed zane in the early twentieth century represents a significant case study in how colonial trade policy displaced Nigerian women's cloth production.</p>
+            <p class="term-context">Documented at: <a href="map.html#TH009">Kano (TH009)</a>, <a href="map.html#TH010">Zaria (TH010)</a> <i class="bi bi-geo-alt-fill text-success"></i></p>
+        </div>
+    </div>
+
+    <!-- Contribution Note -->
+    <div class="how-to-use mt-2">
+        <h5><i class="bi bi-pencil me-2"></i>Help Expand This Glossary</h5>
+        <p class="mb-0">This glossary is an ongoing scholarly resource. If you have corrections, additions, or knowledge of terms not yet included — particularly in Yoruba, Igbo, or Hausa — please <a href="outreach.html" style="color:var(--primary-teal);">get in touch through the Community Outreach page</a>. Community knowledge and scholarly expertise are both welcomed.</p>
+    </div>
+
+</div><!-- /container -->
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>&copy; 2025–2026 Threading Histories | CHI Fellowship Project | Michigan State University</p>
+        <p>
+            <a href="#" class="text-white me-3">Privacy Policy</a>
+            <a href="#" class="text-white me-3">Terms of Use</a>
+            <a href="https://beegrimes.github.io/" target="_blank" rel="noopener noreferrer" class="text-white">Personal Website</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // ── Build alphabet nav ──
+    const letters = [...new Set(
+        [...document.querySelectorAll('.glossary-term')].map(t => t.dataset.letter)
+    )].sort();
+    const allLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const alphaNav = document.getElementById('alphaNav');
+    allLetters.forEach(l => {
+        const a = document.createElement('a');
+        a.textContent = l;
+        if (letters.includes(l)) {
+            a.href = '#letter-' + l;
+        } else {
+            a.classList.add('disabled');
+        }
+        alphaNav.appendChild(a);
+    });
+
+    // ── Search ──
+    document.getElementById('glossarySearch').addEventListener('input', function () {
+        filterGlossary();
+    });
+
+    // ── Group filter buttons ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active');
+                // reset inline styles for hausa/general buttons
+                if (b.dataset.filter === 'hausa') { b.style.background = 'white'; b.style.color = '#6B4F3A'; }
+                if (b.dataset.filter === 'general') { b.style.background = 'white'; b.style.color = '#6c757d'; }
+            });
+            this.classList.add('active');
+            // force active style for hausa/general
+            if (this.dataset.filter === 'hausa') { this.style.background = '#6B4F3A'; this.style.color = 'white'; }
+            if (this.dataset.filter === 'general') { this.style.background = '#6c757d'; this.style.color = 'white'; }
+            filterGlossary();
+        });
+    });
+
+    function filterGlossary() {
+        const query = document.getElementById('glossarySearch').value.toLowerCase().trim();
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+        let anyVisible = false;
+
+        document.querySelectorAll('.glossary-term').forEach(term => {
+            const group = term.dataset.group;
+            const text = term.textContent.toLowerCase();
+            const matchesGroup = activeFilter === 'all' || group === activeFilter;
+            const matchesSearch = query === '' || text.includes(query);
+
+            if (matchesGroup && matchesSearch) {
+                term.classList.remove('hidden');
+                anyVisible = true;
+            } else {
+                term.classList.add('hidden');
+            }
+        });
+
+        // Show/hide sections based on whether they have visible terms
+        document.querySelectorAll('.glossary-section').forEach(section => {
+            const visibleTerms = section.querySelectorAll('.glossary-term:not(.hidden)');
+            section.style.display = visibleTerms.length > 0 ? '' : 'none';
+        });
+
+        document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>
