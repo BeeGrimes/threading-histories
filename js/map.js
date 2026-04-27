@@ -515,10 +515,9 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.show();
     }, 600);
 
-    document.getElementById('welcomeModal').addEventListener('hide.bs.modal', function() {
-        if (document.getElementById('dontShowAgain').checked) {
-            localStorage.setItem(STORAGE_KEY, 'true');
-        }
-    });
+   document.getElementById('welcomeModal').addEventListener('hide.bs.modal', function() {
+    // Always set the flag on dismissal — modal shows once per browser, ever
+    localStorage.setItem(STORAGE_KEY, 'true');
+});
 
 })();
