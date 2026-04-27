@@ -506,18 +506,24 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     const STORAGE_KEY = 'threadingHistories_hideWelcome';
 
-    if (localStorage.getItem(STORAGE_KEY) === 'true') return;
+    document.addEventListener('DOMContentLoaded', function() {
 
-    setTimeout(function() {
+        // If already dismissed before, never show again
+        if (localStorage.getItem(STORAGE_KEY) === 'true') return;
+
         const modalEl = document.getElementById('welcomeModal');
         if (!modalEl) return;
-        const modal = new bootstrap.Modal(modalEl, { backdrop: 'static' });
-        modal.show();
-    }, 600);
 
-   document.getElementById('welcomeModal').addEventListener('hide.bs.modal', function() {
-    // Always set the flag on dismissal — modal shows once per browser, ever
-    localStorage.setItem(STORAGE_KEY, 'true');
-});
+        setTimeout(function() {
+            const modal = new bootstrap.Modal(modalEl, { backdrop: 'static' });
+            modal.show();
+        }, 600);
 
+        // hidden.bs.modal fires AFTER the closing animation completes
+        // — more reliable than hide.bs.modal for setting the flag
+        modalEl.addEventListener('hidden.bs.modal', function() {
+            localStorage.setItem(STORAGE_KEY, 'true');
+        });
+
+    });
 })();
